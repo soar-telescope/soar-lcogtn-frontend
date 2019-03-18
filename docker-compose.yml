@@ -1,0 +1,9 @@
+version: "3.2"
+services:
+  app:
+    build:
+      context: webapp
+    ports:
+      - "5000:3000"
+    restart: always
+

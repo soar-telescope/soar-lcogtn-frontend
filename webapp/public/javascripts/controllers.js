@@ -75,7 +75,8 @@ app.controller('indexController', function($scope, $http, $window) {
 
 app.controller('addOneController', function($scope, $http, $location) {
     $scope.configuration_options = ['SPECTRUM', 'ARC', 'LAMP_FLAT'];
-    $scope.target_types = ['SIDEREAL', 'NON-SIDEREAL?'];
+    $scope.target_types = ['SIDEREAL', 'NON-SIDEREAL'];
+    $scope.rot_modes = ['SKY', 'FLOAT', 'VERTICAL', 'VFLOAT'];
     $scope.target = {'dec': -5.27,
                      'epoch': 2000,
                      'name': 'm43',
@@ -87,6 +88,14 @@ app.controller('addOneController', function($scope, $http, $location) {
         'type': 'SPECTRUM',
         'exposure_count': 1,
         'exposure_time': 360};
+
+    $scope.optical_elements = {
+        'grating': 'SYZY_400',
+        'slit': 'slit_1.0as',
+        'rot_mode' : 'SKY',
+        'rot_angle': 0};
+
+
 
     $scope.windows = {
         'start': '2019-03-20 22:50:42',
@@ -110,10 +119,8 @@ app.controller('addOneController', function($scope, $http, $location) {
                         'bin_y': 2,
                         'exposure_count': $scope.configuration.exposure_count,
                         'exposure_time': $scope.configuration.exposure_time,
-                        'optical_elements': {
-                            'grating': 'SYZY_400',
-                            'slit': 'slit_1.0as'
-                        }}],
+                        'optical_elements': $scope.optical_elements
+                    }],
                     'instrument_type': 'SOAR_GHTS_REDCAM',
                     'target': $scope.target,
                     'type': $scope.configuration.type}],

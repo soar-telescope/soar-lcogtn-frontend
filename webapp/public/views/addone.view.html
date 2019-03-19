@@ -55,7 +55,7 @@
                             <select class="form-control" id="configuration_type"
                                     ng-model="configuration.type">
                                 <option ng-repeat="conf_opt in configuration_options"
-                                        ng-selected="conf_opt === configuration.type">
+                                        ng-selected="conf_opt == configuration.type">
                                     {{conf_opt}}
                                 </option>
                             </select>
@@ -75,6 +75,23 @@
                                    class="form-control"
                                    id="configuration_exposure_time"
                                    ng-model="configuration.exposure_time">
+                        </div>
+                        <div class="form-group">
+                            <label for="optical_elements_rot_mode">Rotation Mode</label>
+                            <select class="form-control" id="optical_elements_rot_mode"
+                                    ng-model="optical_elements.rot_mode">
+                                <option ng-repeat="rot_mode in rot_modes"
+                                        ng-selected="rot_mode == optical_elements.rot_mode">
+                                    {{rot_mode}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="optical_elements_rot_angle">Rotation Angle</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="optical_elements_rot_angle"
+                                   ng-model="optical_elements.rot_angle">
                         </div>
 
                     </div>

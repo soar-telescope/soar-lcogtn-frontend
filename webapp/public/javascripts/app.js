@@ -5,7 +5,12 @@ app.config(function ($routeProvider, $locationProvider) {
         .when("/", {
         templateUrl: '/views/index.view.html',
         controller: 'indexController'
-    }).otherwise({redirectTo: '/'});
+    })
+        .when('/addone', {
+            templateUrl: '/views/addone.view.html',
+            controller: 'addOneController'
+        })
+        .otherwise({redirectTo: '/'});
 
     $locationProvider.html5Mode(true);
 });

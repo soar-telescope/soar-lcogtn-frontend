@@ -1,0 +1,113 @@
+<div class="container">
+    <form>
+        <div class="card">
+            <div class="card-header">
+                <h5> Add a new request </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-3 col-md-4">
+                        <h3>Target</h3>
+                        <div class="form-group">
+                            <label for="target_name">Name</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="target_name"
+                                   ng-model="target.name">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="target_ra">RA</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="target_ra"
+                                   ng-model="target.ra">
+                        </div>
+                        <div class="form-group">
+                            <label for="target_dec">DEC</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="target_dec"
+                                   ng-model="target.dec">
+                        </div>
+                        <div class="form-group">
+                            <label for="target_epoch">Epoch</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="target_epoch"
+                                   ng-model="target.epoch">
+                        </div>
+                        <div class="form-group">
+                            <label for="target_type">Type</label>
+                            <select class="form-control" id="target_type"
+                                    ng-model="target.type">
+                                <option ng-repeat="targ_type in target_types"
+                                        ng-selected="targ_type === target.type">
+                                    {{targ_type}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-4">
+                        <h3>Configuration</h3>
+                        <div class="form-group">
+                            <label for="configuration_type">Type</label>
+                            <select class="form-control" id="configuration_type"
+                                    ng-model="configuration.type">
+                                <option ng-repeat="conf_opt in configuration_options"
+                                        ng-selected="conf_opt === configuration.type">
+                                    {{conf_opt}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="configuration_exposure_count">Exposure
+                                Count</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="configuration_exposure_count"
+                                   ng-model="configuration.exposure_count">
+                        </div>
+                        <div class="form-group">
+                            <label for="configuration_exposure_time">Exposure
+                                Time</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="configuration_exposure_time"
+                                   ng-model="configuration.exposure_time">
+                        </div>
+
+                    </div>
+                    <div class="col-sm-3 col-md-4">
+                        <h3>Windows</h3>
+                        <div class="form-group">
+                            <label for="windows_start">Start</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="windows_start"
+                                   ng-model="windows.start">
+                        </div>
+                        <div class="form-group">
+                            <label for="windows_end">End</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="windows_end"
+                                   ng-model="windows.end">
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary m-1" ng-click="post_data()" style="float: right">Submit</button>
+                <button class="btn btn-danger m-1" ng-click="cancel()" style="float: right">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+
+

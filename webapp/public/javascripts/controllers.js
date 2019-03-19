@@ -1,6 +1,7 @@
 var app = angular.module('requestGroupsApp');
 
 app.controller('mainController', function ($scope) {
+    $scope.page_title = 'SOAR-LCO Interface'
     console.log('Loading main controller');
 });
 
@@ -20,6 +21,59 @@ app.controller('indexController', function($scope, $http, $window) {
     };
 
     $scope.reqGroups = null;
+
+
+    $scope.get_data = function () {
+        $http({
+            method: 'GET',
+            url: '/api/requestgroups',
+            headers: {
+                'Authorization': 'Token ' + 'c377c2bfbaafd9089b12a1b3590fc8b0d39c5686'
+            }
+        }).then(function (res) {
+            if (res.data.sucess) {
+                $scope.reqGroups = res.data.data;
+                if ($scope.current_active === null) {
+                    $scope.current_active = $scope.reqGroups.count;
+                };
+            } else {
+                console.log("error");
+                console.log(res);
+            }
+
+        }, function(err) {
+            console.log(err);
+        });
+    };
+
+
+
+    $scope.delete = function(group) {
+        $http({
+            method: 'DELETE',
+            url: '/api/requestgroups/' + group.id,
+            headers: {
+                'Authorization': 'Token ' + 'c377c2bfbaafd9089b12a1b3590fc8b0d39c5686'
+            },
+        }).then(function (res) {
+            if (res.data.sucess) {
+                $scope.get_data();
+                console.log(res.data.data);
+            } else {
+                console.log("error");
+                console.log(res);
+            }
+
+        }, function(err) {
+            console.log(err);
+        });
+    };
+
+    $scope.get_data();
+});
+
+
+app.controller('addOneController', function($scope, $http, $location) {
     $scope.configuration_options = ['SPECTRUM', 'ARC', 'LAMP_FLAT'];
     $scope.target_types = ['SIDEREAL', 'NON-SIDEREAL?'];
     $scope.target = {'dec': -5.27,
@@ -67,30 +121,6 @@ app.controller('indexController', function($scope, $http, $window) {
                 'windows': [$scope.windows]}]};
     };
 
-
-    $scope.get_data = function () {
-        $http({
-            method: 'GET',
-            url: '/api/requestgroups',
-            headers: {
-                'Authorization': 'Token ' + 'c377c2bfbaafd9089b12a1b3590fc8b0d39c5686'
-            }
-        }).then(function (res) {
-            if (res.data.sucess) {
-                $scope.reqGroups = res.data.data;
-                if ($scope.current_active === null) {
-                    $scope.current_active = $scope.reqGroups.count;
-                };
-            } else {
-                console.log("error");
-                console.log(res);
-            }
-
-        }, function(err) {
-            console.log(err);
-        });
-    };
-
     $scope.post_data = function () {
         create_request_group();
         $http({
@@ -102,8 +132,8 @@ app.controller('indexController', function($scope, $http, $window) {
             data: $scope.request_group
         }).then(function (res) {
             if (res.data.sucess) {
-                $scope.get_data();
-                console.log(res.data.data);
+                // console.log(res.data.data);
+                $location.path('/');
             } else {
                 console.log("error");
                 console.log(res);
@@ -114,26 +144,4 @@ app.controller('indexController', function($scope, $http, $window) {
         });
     };
 
-    $scope.delete = function(group) {
-        $http({
-            method: 'DELETE',
-            url: '/api/requestgroups/' + group.id,
-            headers: {
-                'Authorization': 'Token ' + 'c377c2bfbaafd9089b12a1b3590fc8b0d39c5686'
-            },
-        }).then(function (res) {
-            if (res.data.sucess) {
-                $scope.get_data();
-                console.log(res.data.data);
-            } else {
-                console.log("error");
-                console.log(res);
-            }
-
-        }, function(err) {
-            console.log(err);
-        });
-    };
-
-    $scope.get_data();
 });

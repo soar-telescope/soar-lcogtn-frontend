@@ -1,7 +1,7 @@
 <html ng-app="requestGroupsApp"  ng-controller="mainController">
 
 <head>
-  <title>GOODMAN - LCO</title>
+  <title>{{page_title}}</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,6 +30,54 @@
 
 <body>
 <div class="container-fluid">
+    <nav class="navbar navbar-expand-sm bg-secondary navbar-dark fixed-top">
+        <a class="navbar-brand" href="/">{{page_title}}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <div class="navbar-nav mr-auto">
+                <ul class="navbar-nav float-left-sm">
+                    <li class="nav-item m-1">
+                        <a class="nav-link active" data-toggle="tab" href="/">Home</a>
+                    </li>
+                    <li class="nav-item m-1 ng-cloak">
+                        <a class="nav-link"  data-toggle="tab" href="/addone">Add One</a>
+                    </li>
+                    <li class="nav-item m-1 ng-cloak" ng-if="username">
+                        <a class="nav-link"  data-toggle="tab" href="/settings">Settings</a>
+                    </li>
+                </ul>
+            </div>
+            <!--<div class="navbar-nav">-->
+                <!--<ul class="navbar-nav float-lg-right">-->
+                    <!--<li class="nav-item m-1">-->
+                        <!--<button class="btn btn-outline-primary"-->
+                                <!--ng-if="username"-->
+                                <!--type="button">-->
+                                <!--<span class="fa fa-user"> {{ username }} </span>-->
+                        <!--</button>-->
+                     <!--</li>-->
+                     <!--<li class="nav-item m-1">-->
+                        <!--<button class="btn btn-primary"-->
+                                <!--ng-hide="isSignedIn()"-->
+                                <!--type="button"-->
+                                <!--ng-click="showSignin()">-->
+                                <!--<span class="fa fa-sign-in"> Sign In </span>-->
+                        <!--</button>-->
+                        <!--<button class="btn btn-danger"-->
+                                <!--ng-show="isSignedIn()"-->
+                                <!--type="button"-->
+                                <!--ng-click="signout()">-->
+                                <!--<span class="fa fa-sign-out"> Sign Out </span>-->
+                        <!--</button>-->
+
+                     <!--</li>-->
+                <!--</ul>-->
+            <!--</div>-->
+        </div>
+    </nav>
 </div>
 
 <div class="container-fluid" style="margin-top: 80px">

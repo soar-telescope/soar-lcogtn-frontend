@@ -1,4 +1,4 @@
-var app = angular.module('requestGroupsApp', ['ngRoute', 'ngResource', 'ui.bootstrap']);
+var app = angular.module('requestGroupsApp', ['ngRoute', 'ngResource']);
 
 app.config(function ($routeProvider, $locationProvider) {
     $routeProvider

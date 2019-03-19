@@ -5,6 +5,20 @@ app.controller('mainController', function ($scope) {
 });
 
 app.controller('indexController', function($scope, $http, $window) {
+    $scope.current_active = null;
+    $scope.is_active = function(id) {
+        return $scope.current_active === id;
+    };
+
+    $scope.change_active = function(id) {
+        if ($scope.current_active == id) {
+            $scope.current_active = null;
+        } else {
+            $scope.current_active = id;
+        }
+
+    };
+
     $scope.reqGroups = null;
     $scope.configuration_options = ['SPECTRUM', 'ARC', 'LAMP_FLAT'];
     $scope.target_types = ['SIDEREAL', 'NON-SIDEREAL?'];
@@ -64,7 +78,9 @@ app.controller('indexController', function($scope, $http, $window) {
         }).then(function (res) {
             if (res.data.sucess) {
                 $scope.reqGroups = res.data.data;
-                console.log(res.data.data);
+                if ($scope.current_active === null) {
+                    $scope.current_active = $scope.reqGroups.count;
+                };
             } else {
                 console.log("error");
                 console.log(res);

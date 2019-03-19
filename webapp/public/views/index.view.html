@@ -1,0 +1,199 @@
+<div class="container">
+    <form>
+        <div class="row">
+            <div class="col-sm-2">
+                <h3>Target</h3>
+        <div class="form-group">
+                    <label for="target_name">Name</label>
+                    <input type="text"
+                           class="form-control"
+                           id="target_name"
+                           ng-model="target.name">
+
+                </div>
+                <div class="form-group">
+                    <label for="target_ra">RA</label>
+                    <input type="text"
+                           class="form-control"
+                           id="target_ra"
+                           ng-model="target.ra">
+                </div>
+                <div class="form-group">
+                    <label for="target_dec">DEC</label>
+                    <input type="text"
+                           class="form-control"
+                           id="target_dec"
+                           ng-model="target.dec">
+                </div>
+                <div class="form-group">
+                    <label for="target_epoch">Epoch</label>
+                    <input type="text"
+                           class="form-control"
+                           id="target_epoch"
+                           ng-model="target.epoch">
+                </div>
+                <div class="form-group">
+                    <label for="target_type">Type</label>
+                    <select class="form-control" id="target_type" ng-model="target.type">
+                        <option ng-repeat="targ_type in target_types"
+                                ng-selected="targ_type === target.type">{{targ_type}}</option>
+                    </select>
+                    <!--<input type="text"-->
+                           <!--class="form-control"-->
+                           <!--id="target_type"-->
+                           <!--ng-model="target.type">-->
+                </div>
+    </div>
+    <div class="col-sm-2">
+        <h3>Configuration</h3>
+        <div class="form-group">
+            <label for="configuration_type">Type</label>
+            <select class="form-control" id="configuration_type" ng-model="configuration.type">
+                <option ng-repeat="conf_opt in configuration_options"
+                        ng-selected="conf_opt === configuration.type">{{conf_opt}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="configuration_exposure_count">Exposure Count</label>
+            <input type="text"
+                   class="form-control"
+                   id="configuration_exposure_count"
+                   ng-model="configuration.exposure_count">
+        </div>
+        <div class="form-group">
+            <label for="configuration_exposure_time">Exposure Time</label>
+            <input type="text"
+                   class="form-control"
+                   id="configuration_exposure_time"
+                   ng-model="configuration.exposure_time">
+        </div>
+
+    </div>
+    <div class="col-sm-3">
+        <h3>Windows</h3>
+        <div class="form-group">
+            <label for="windows_start">Start</label>
+            <input type="text"
+                   class="form-control"
+                   id="windows_start"
+                   ng-model="windows.start">
+        </div>
+        <div class="form-group">
+            <label for="windows_end">End</label>
+            <input type="text"
+                   class="form-control"
+                   id="windows_end"
+                   ng-model="windows.end">
+        </div>
+
+    </div>
+        </div>
+
+    <!--<table class="table table-striped">-->
+
+        <!--<tbody>-->
+        <!--<tr>-->
+            <!--<td>Target</td>-->
+            <!--<td>-->
+
+            <!--</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td>Configuration</td>-->
+            <!--<td>-->
+
+            <!--</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+            <!--<td>Windows</td>-->
+            <!--<td>-->
+                <!---->
+            <!--</td>-->
+        <!--</tr>-->
+
+        <!--&lt;!&ndash;<td>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
+            <!--&lt;!&ndash;<label for="ipp_value">IPP Value</label>&ndash;&gt;-->
+            <!--&lt;!&ndash;<input type="text" class="form-control" id="ipp_value" ng-model="request_group.ipp_value">&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;</td>&ndash;&gt;-->
+        <!--<tr>-->
+            <!--<td>-->
+
+                <!---->
+            <!--</td>-->
+        <!--</tr>-->
+
+        <!--</tbody>-->
+
+
+<button class="btn btn-primary" ng-click="post_data()">Submit</button>
+    <!--</table>-->
+
+    </form>
+
+</div>
+
+<div class="container">
+    <h2>Found {{reqGroups.count}} results</h2>
+    <div class="accordion" ui="acordionRequests">
+        <div class="card">
+            <a class="card-header" data-toggle="collapse show" data-target="collapseOne" href=""><span style="float: left">Primer</span> </a>
+            <div id="collapseOne" class="collapse" data-parent="acordionRequests">
+                <div class="card-body">
+                    body 1
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <a class="card-header" data-toggle="collapse" data-target="collapseTwo" href=""><span style="float: left">Segundo</span> </a>
+            <div id="collapseTwo" class="collapse" data-parent="acordionRequests">
+                <div class="card-body">
+                    body 2
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="container">
+    <h3> Found {{ reqGroups.count }} results </h3>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Submitter</th>
+            <th>Proposal</th>
+            <th>Name</th>
+            <th>Observation Type</th>
+            <th>Operator</th>
+            <th>IPP Value</th>
+            <th>State</th>
+            <th>Telescope Class</th>
+            <th>Action</th>
+
+        </tr>
+
+        </thead>
+        <tbody>
+        <tr ng-repeat="res in reqGroups.results">
+            <td>{{res.id}}</td>
+            <td>{{res.submitter}}</td>
+            <td>{{res.proposal}}</td>
+            <td>{{res.name}}</td>
+            <td>{{res.observation_type}}</td>
+            <td>{{res.operator}}</td>
+            <td>{{res.ipp_value}}</td>
+            <td>{{res.state}}</td>
+            <td>{{res.requests[0].location.telescope_class}}</td>
+            <td><button class="btn btn-danger" ng-click="delete(res)" ng-disabled="res.state === 'CANCELED'">Cancel</button></td>
+        </tr>
+        </tbody>
+
+
+    </table>
+
+  </div>

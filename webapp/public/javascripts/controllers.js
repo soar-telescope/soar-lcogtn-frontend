@@ -151,4 +151,8 @@ app.controller('addOneController', function($scope, $http, $location) {
         });
     };
 
+    $scope.cancel = function() {
+        $location.path('/');
+    }
+
 });

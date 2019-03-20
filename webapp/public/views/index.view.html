@@ -34,11 +34,18 @@
                               </table>
                              <div row>
                                  <div class="col-sm-3 col-md-4" ng-repeat="reqs in res.requests">
-                                     <li>{{reqs.id}}</li>
-                                     <li>{{reqs.observation_note}}</li>
-                                     <li>{{reqs.state}}</li>
-                                     <li>{{reqs.acceptability_threshold}}</li>
-                                     <li>{{reqs.duration}}</li>
+                                     <li>ID: {{reqs.id}}</li>
+                                     <li>Observation Note: {{reqs.observation_note}}</li>
+                                     <li>State: {{reqs.state}}</li>
+                                     <li>Acceptability Threshold: {{reqs.acceptability_threshold}}</li>
+                                     <li>Duration: {{reqs.duration}}</li>
+                                 </div>
+                                 <!--{{res}}-->
+                                 <div class="col-sm-3 col-md-4" ng-repeat="confs in res.requests[0].configurations">
+                                     <li>ID: {{confs.id}}d</li>
+                                     <li>Instrument Type: {{confs.instrument_type}}</li>
+                                     <li>Type {{confs.type}}</li>
+                                     <li>Priority: {{confs.priority}}</li>
 
                                  </div>
                              </div>

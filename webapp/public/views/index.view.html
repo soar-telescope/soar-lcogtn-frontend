@@ -1,73 +1,151 @@
 
 
-<div class="container-fluid">
-    <div class="card">
-        <div class="card-header bg-dark text-white">
-            <h3>Found {{reqGroups.count}} requests</h3>
-        </div>
-        <div class="card-body">
-            <div class="list-group" ng-repeat="res in reqGroups.results">
-                <a href="#"
-                   class="list-group-item list-group-item-action list-group-item-dark mb-1"
-                   ng-class="{active: is_active(res.id)}"
-                   ng-click="change_active(res.id)">
-                    <h5> ID: {{res.id}} Submitted by: {{res.submitter}} State: <span ng-class="{'text-danger': res.state == 'CANCELED', 'text-info': res.state == 'PENDING'}" >{{res.state}}</span></h5>
-                 </a>
-                 <div id="res.id" class="collapse" ng-class="{'show': is_active(res.id)}">
-                     <div class="card mb-1">
-                         <!--<div class="card-header">-->
-                             <!--Header-->
-                         <!--</div>-->
-                         <div class="card-body">
-                             <table class="table table-striped">
-                                  <tbody>
-                                      <tr><td>ID</td>                <td>{{res.id}}</td>                                  </tr>
-                                      <tr><td>Submitter</td>         <td>{{res.submitter}}</td>                           </tr>
-                                      <tr><td>Proposal</td>          <td>{{res.proposal}}</td>                            </tr>
-                                      <tr><td>Name</td>              <td>{{res.name}}</td>                                </tr>
-                                      <tr><td>Observation Type</td>  <td>{{res.observation_type}}</td>                    </tr>
-                                      <tr><td>Operator</td>          <td>{{res.operator}}</td>                            </tr>
-                                      <tr><td>IPP Value</td>         <td>{{res.ipp_value}}</td>                           </tr>
-                                      <tr><td>State</td>             <td>{{res.state}}</td>                               </tr>
-                                      <tr><td>Telescope Class</td>   <td>{{res.requests[0].location.telescope_class}}</td></tr>
-                                  </tbody>
-                              </table>
-                             <div row>
-                                 <div class="col-sm-3 col-md-4" ng-repeat="reqs in res.requests">
-                                     <li>ID: {{reqs.id}}</li>
-                                     <li>Observation Note: {{reqs.observation_note}}</li>
-                                     <li>State: {{reqs.state}}</li>
-                                     <li>Acceptability Threshold: {{reqs.acceptability_threshold}}</li>
-                                     <li>Duration: {{reqs.duration}}</li>
-                                 </div>
-                                 <!--{{res}}-->
-                                 <div class="col-sm-3 col-md-4" ng-repeat="confs in res.requests[0].configurations">
-                                     <li>ID: {{confs.id}}d</li>
-                                     <li>Instrument Type: {{confs.instrument_type}}</li>
-                                     <li>Type {{confs.type}}</li>
-                                     <li>Priority: {{confs.priority}}</li>
+<div class="container-fluid  m-0 p-0">
+    <!--<div class="row">-->
+        <div class="card m-0 p-0">
+            <div class="card-header bg-dark text-white">
+                <h3>Found {{reqGroups.count}} requests</h3>
+            </div>
+            <div class="card-body">
+                <div class="list-group" ng-repeat="res in reqGroups.results">
+                    <a href="#"
+                       class="list-group-item list-group-item-action list-group-item-dark mb-xs-0 mb-md-1"
+                       ng-class="{active: is_active(res.id)}"
+                       ng-click="change_active(res.id)">
+                        <h5> ID: {{res.id}} Submitted by: {{res.submitter}} State: <span ng-class="{'text-danger': res.state == 'CANCELED', 'text-info': res.state == 'PENDING'}" >{{res.state}}</span></h5>
+                     </a>
+                     <div id="res.id" class="collapse" ng-class="{'show': is_active(res.id)}">
+                         <div class="card mb-xs-0 mb-md-1">
+                             <!--<div class="card-header">-->
+                                 <!--Header-->
+                             <!--</div>-->
+                             <div class="card-body">
+                                 <div class="card">
+                                     <div class="card-body">
+                                         <div class="row" ng-repeat="reqs in res.requests">
+                                             <div class="col-sm-4 col-md-7 col-lg-3">
+                                                 <div class="card">
+                                                     <div class="card-header">
+                                                         <h3>Request Group</h3>
+                                                     </div>
+                                                     <div class="card-body">
+                                                         <ul>
+                                                             <li>Submitter: {{res.submitter}}</li>
+                                                             <li>Proposal: {{res.proposal}}</li>
+                                                             <li>Name: {{res.name}}</li>
+                                                             <li>Observation Type: {{res.observation_type}}</li>
+                                                             <li>Operator: {{res.operator}}</li>
+                                                             <li>IPP Value: {{res.ipp_value}}</li>
+                                                                 <!--<tr><td>State</td>             <td>{{res.state}}</td>                               </tr>-->
+                                                             <li>Telescope Class: {{reqs.location.telescope_class}}</li>
+                                                             <li>Window</li>
+                                                                 <ul>
+                                                                     <li ng-repeat-start="windw in reqs.windows">Start: {{windw.start}}</li>
+                                                                     <li ng-repeat-end>End: {{windw.end}}</li>
+                                                                 </ul>
+                                                         </ul>
 
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                             <div class="col-sm-4 col-md-7 col-lg-3">
+                                                 <div class="card">
+                                                     <div class="card-header">
+                                                         <h3>Request {{reqs.id}} Summary</h3>
+                                                     </div>
+                                                     <div class="card-body">
+                                                         <!--<li>ID: {{reqs.id}}</li>-->
+                                                         <ul>
+                                                             <li>Observation Note: {{reqs.observation_note}}</li>
+                                                             <li>State: {{reqs.state}}</li>
+                                                             <li>Acceptability Threshold: {{reqs.acceptability_threshold}}</li>
+                                                             <li>Duration: {{reqs.duration}}</li>
+                                                         </ul>
+
+                                                     </div>
+                                                 </div>
+
+                                             </div>
+                                             <!--{{res}}-->
+                                             <div class="col-sm-4 col-md-7 col-lg-3" ng-repeat="confs in res.requests[0].configurations">
+                                                 <div class="card">
+                                                     <div class="card-header">
+                                                         <h3>Configuration ID: {{confs.id}}</h3>
+                                                     </div>
+                                                     <div class="card-body">
+                                                         <ul>
+                                                             <li>Instrument Type: {{confs.instrument_type}}</li>
+                                                             <li>Type: {{confs.type}}</li>
+                                                             <li>Priority: {{confs.priority}}</li>
+                                                             <li>Instrument Configurations</li>
+                                                                  <ul>
+                                                                      <li ng-repeat-start="instconf in confs.instrument_configs">Mode: {{instconf.mode}}</li>
+                                                                      <li>Slit: {{instconf.optical_elements.slit}}</li>
+                                                                      <li>Grating: {{instconf.optical_elements.grating}}</li>
+                                                                      <li>Exposure Time: {{instconf.exposure_time}} seconds</li>
+                                                                      <li>Exposure Count: {{instconf.exposure_count}}</li>
+                                                                      <li>Bin X: {{instconf.bin_x}}</li>
+                                                                      <li>Bin Y: {{instconf.bin_y}}</li>
+                                                                      <li>Rotation Mode: {{instconf.rot_mode}}</li>
+                                                                      <li ng-repeat-end> Rotation Angle: {{instconf.extra_params.rot_angle}}</li>
+                                                                  </ul>
+                                                             <li>Constraints</li>
+                                                                 <ul>
+                                                                     <li>Maximum Airmass: {{confs.constraints.max_airmass}}</li>
+                                                                     <li>Minimum Lunar Distance: {{confs.constraints.min_lunar_distance}}</li>
+                                                                 </ul>
+                                                             <li>Acquisition</li>
+                                                                 <ul>
+                                                                     <li>Mode: {{confs.acquisition_config.mode}}</li>
+                                                                 </ul>
+                                                             <li>Guiding</li>
+                                                                 <ul>
+                                                                     <li>State: {{confs.guiding_config.state}}</li>
+                                                                     <li>Mode: {{confs.guiding_config.mode}}</li>
+                                                                     <li>Exposure Time: {{confs.guiding_config.exposure_time}}</li>
+                                                                 </ul>
+                                                             <li>Target</li>
+                                                                 <ul>
+                                                                     <li>Type: {{confs.target.type}}</li>
+                                                                     <li>Name: {{confs.target.name}}</li>
+                                                                     <li>RA: {{confs.target.ra}}</li>
+                                                                     <li>DEC: {{confs.target.dec}}</li>
+                                                                     <li>Proper Motion RA: {{confs.target.proper_motion_ra}}</li>
+                                                                     <li>Proper Motion DEC: {{confs.target.proper_motion_dec}}</li>
+                                                                     <li>Parallax: {{confs.target.parallax}}</li>
+                                                                     <li>Coordinate System: {{confs.target.coordinate_system}}</li>
+                                                                     <li>Equinox: {{confs.target.equinox}}</li>
+                                                                     <li>Epoch: {{confs.target.epoch}}</li>
+                                                                 </ul>
+
+                                                         </ul>
+                                                         <!--<li>ID: {{confs.id}}</li>-->
+
+                                                         <!--<li>{{instconf.}}</li>-->
+                                                     </div>
+                                                 </div>
+
+
+                                             </div>
+                                 </div>
+
+                                     </div>
                                  </div>
                              </div>
-
+                             <div class="card-footer">
+                                 <button class="btn btn-danger" ng-click="delete(res)" ng-disabled="res.state === 'CANCELED'" style="float: right">Cancel</button>
+                             </div>
 
                          </div>
-                         <div class="card-footer">
-                             <button class="btn btn-danger" ng-click="delete(res)" ng-disabled="res.state === 'CANCELED'" style="float: right">Cancel</button>
-                         </div>
+
+
 
                      </div>
-
-
-
-                 </div>
+                </div>
             </div>
+            <!--<div class="card-footer">-->
+                    <!--<button class="btn btn-danger" ng-click="delete(res)" ng-disabled="res.state === 'CANCELED'">Cancel</button>-->
+            <!--</div>-->
         </div>
-        <!--<div class="card-footer">-->
-                <!--<button class="btn btn-danger" ng-click="delete(res)" ng-disabled="res.state === 'CANCELED'">Cancel</button>-->
-        <!--</div>-->
-        </div>
-
-
-
+    <!--</div>-->
 </div>

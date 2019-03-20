@@ -6,6 +6,47 @@
             </div>
             <div class="card-body">
                 <div class="row">
+                    <div class="col">
+                        <h3>General</h3>
+                        <div class="form-group">
+                            <label for="rg_ipp">IPP</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="rg_ipp"
+                                   ng-model="request_group_general.ipp_value">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="rg_name">Name</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="rg_name"
+                                   ng-model="request_group_general.name">
+                        </div>
+                        <div class="form-group">
+                            <label for="rg_observation_type">Observation Type</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="rg_observation_type"
+                                   ng-model="request_group_general.observation_type">
+                        </div>
+                        <div class="form-group">
+                            <label for="rg_operator">Operator</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="rg_operator"
+                                   ng-model="request_group_general.operator">
+                        </div>
+                        <div class="form-group">
+                            <label for="rg_proposal">Proposal</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="rg_proposal"
+                                   ng-model="request_group_general.proposal">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-sm-3 col-md-4">
                         <h3>Target</h3>
                         <div class="form-group">
@@ -31,6 +72,20 @@
                                    ng-model="target.dec">
                         </div>
                         <div class="form-group">
+                            <label for="target_proper_motion_ra">Proper Motion RA</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="target_proper_motion_ra"
+                                   ng-model="target.proper_motion_ra">
+                        </div>
+                        <div class="form-group">
+                            <label for="target_proper_motion_dec">Proper Motion DEC</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="target_proper_motion_dec"
+                                   ng-model="target.proper_motion_dec">
+                        </div>
+                        <div class="form-group">
                             <label for="target_epoch">Epoch</label>
                             <input type="text"
                                    class="form-control"
@@ -45,67 +100,153 @@
                             </select>
                         </div>
                     </div>
+
                     <div class="col-sm-3 col-md-4">
-                        <h3>Configuration</h3>
-                        <div class="form-group">
-                            <label for="configuration_type">Type</label>
-                            <select class="form-control" id="configuration_type"
-                                    ng-options="conf_opt for conf_opt in configuration_options"
-                                    ng-model="configuration.type">
-                            </select>
+                        <h3>Windows</h3>
+                        <div ng-repeat="window in windows">
+                            <div class="form-group">
+                                <label for="window_start">Start</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="window_start"
+                                       ng-model="window.start">
+                            </div>
+                            <div class="form-group">
+                                <label for="window_end">End</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="window_end"
+                                       ng-model="window.end">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="configuration_exposure_count">Exposure
-                                Count</label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="configuration_exposure_count"
-                                   ng-model="configuration.exposure_count">
-                        </div>
-                        <div class="form-group">
-                            <label for="configuration_exposure_time">Exposure
-                                Time</label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="configuration_exposure_time"
-                                   ng-model="configuration.exposure_time">
-                        </div>
-                        <div class="form-group">
-                            <label for="optical_elements_rot_mode">Rotation Mode</label>
-                            <select class="form-control" id="optical_elements_rot_mode"
-                                    ng-options="rot_mode for rot_mode in rot_modes"
-                                    ng-model="optical_elements.rot_mode">
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="optical_elements_rot_angle">Rotation Angle</label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="optical_elements_rot_angle"
-                                   ng-model="optical_elements.rot_angle">
-                        </div>
+
 
                     </div>
                     <div class="col-sm-3 col-md-4">
-                        <h3>Windows</h3>
-                        <div class="form-group">
-                            <label for="windows_start">Start</label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="windows_start"
-                                   ng-model="windows.start">
-                        </div>
-                        <div class="form-group">
-                            <label for="windows_end">End</label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="windows_end"
-                                   ng-model="windows.end">
-                        </div>
+                        <h3>Instrument Configurations</h3>
+                        <div ng-repeat="inst_conf in instrument_configs">
+                            <div class="form-group">
+                                <label for="inst_conf_opt_elem_grating">Grating</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="inst_conf_opt_elem_grating"
+                                       ng-model="inst_conf.optical_elements.grating">
+                            </div>
+                            <div class="form-group">
+                                <label for="inst_conf_opt_elem_slit">Slit</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="inst_conf_opt_elem_slit"
+                                       ng-model="inst_conf.optical_elements.slit">
+                            </div>
+                            <div class="form-group">
+                                <label for="inst_conf_exposure_time">Exposure Time</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="inst_conf_exposure_time"
+                                       ng-model="inst_conf.exposure_time">
+                            </div>
+                            <div class="form-group">
+                                <label for="inst_conf_exposure_count">Exposure Count</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="inst_conf_exposure_count"
+                                       ng-model="inst_conf.exposure_count">
+                            </div>
+                            <div class="form-group">
+                                <label for="inst_conf_rot_mode">Rotation Mode</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="inst_conf_rot_mode"
+                                       ng-model="inst_conf.rot_mode">
+                            </div>
+                            <div class="form-group">
+                                <label for="inst_conf_extra_par_rot_angle">Rotation Angle</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="inst_conf_extra_par_rot_angle"
+                                       ng-model="inst_conf.extra_params.rot_angle">
+                            </div>
+                            <div class="form-group">
+                                <label for="inst_conf_bin_x">Binning X</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="inst_conf_bin_x"
+                                       ng-model="inst_conf.bin_x">
+                            </div>
+                            <div class="form-group">
+                                <label for="inst_conf_bin_y">Binning Y</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="inst_conf_bin_y"
+                                       ng-model="inst_conf.bin_y">
+                            </div>
 
+                        </div>
                     </div>
 
                 </div>
+                <div class="row">
+                    <h3>Configurations</h3>
+                    <button class="btn btn-primary m-1"
+                            ng-click="add_one_configuration()">+1</button>
+                </div>
+                <div class="row">
+                        <div class="col col-sm-3 col-md-4" ng-repeat="conf in configurations">
+                            <div class="card">
+                                <div class="card-body">
+                                    <button type="button" class="close" ng-click="remove_configuration(conf)">x</button>
+                                    <div class="form-group">
+                                        <label for="configuration_type">Type</label>
+                                        <select class="form-control" id="configuration_type"
+                                                ng-options="conf_opt for conf_opt in configuration_types"
+                                                ng-model="conf.type">
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="configuration_instrument_type">Instrument Type</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="configuration_instrument_type"
+                                               ng-model="conf.instrument_type">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="configuration_guiding_config">Guiding Configuration</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="configuration_guiding_config"
+                                               ng-model="conf.guiding_config.state">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="configuration_constraints_max_airmass">Maximum Airmass</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="configuration_constraints_max_airmass"
+                                               ng-model="conf.constraints.max_airmass">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="configuration_constraints_min_lunar_distance">Minimum Lunar Distance</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="configuration_constraints_min_lunar_distance"
+                                               ng-model="conf.constraints.min_lunar_distance">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="configuration_acquisition_config_mode">Aquisition Configuration Mode</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="configuration_acquisition_config_mode"
+                                               ng-model="conf.acquisition_config.mode">
+                                     </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                 
+                </div>
+
             </div>
             <div class="card-footer">
                 <button class="btn btn-primary m-1" ng-click="post_data()" style="float: right">Submit</button>

@@ -74,62 +74,78 @@ app.controller('indexController', function($scope, $http, $window) {
 
 
 app.controller('addOneController', function($scope, $http, $location) {
-    $scope.configuration_options = ['SPECTRUM', 'ARC', 'LAMP_FLAT'];
+    $scope.configuration_types = ['SPECTRUM', 'ARC', 'LAMP_FLAT'];
     $scope.target_types = ['SIDEREAL', 'NON-SIDEREAL'];
     $scope.rot_modes = ['SKY', 'FLOAT', 'VERTICAL', 'VFLOAT'];
-    $scope.target = {'dec': -5.27,
-                     'epoch': 2000,
-                     'name': 'm43',
-                     'proper_motion_dec': 0.0,
-                     'proper_motion_ra': 0.0,
-                     'ra': 83.879,
-                     'type': 'SIDEREAL'};
-    $scope.configuration = {
-        'type': 'SPECTRUM',
+    $scope.target = {
+        'dec': -5.27,
+        'epoch': 2000,
+        'name': 'm43',
+        'proper_motion_dec': 0.0,
+        'proper_motion_ra': 0.0,
+        'ra': 83.879,
+        'type': 'SIDEREAL'};
+
+    $scope.instrument_configs = [{
+        'bin_x': 2,
+        'bin_y': 2,
         'exposure_count': 1,
-        'exposure_time': 360};
-
-    $scope.optical_elements = {
-        'grating': 'SYZY_400',
-        'slit': 'slit_1.0as',
+        'exposure_time': 360,
         'rot_mode' : 'SKY',
-        'rot_angle': 0};
+        'optical_elements': {
+            'grating': 'SYZY_400',
+            'slit': 'slit_1.0as'
+            },
+        'extra_params': {
+            'rot_angle': 0}
+        }];
+
+    $scope.configurations = [{
+        'acquisition_config': {
+            'mode': 'MANUAL'
+        },
+        'constraints': {
+            'max_airmass': 1.6,
+            'min_lunar_distance': 30
+        },
+        'guiding_config': {
+            'state': 'OPTIONAL'
+        },
+        'instrument_configs': $scope.instrument_configs,
+        'instrument_type': 'SOAR_GHTS_REDCAM',
+        'target': $scope.target,
+        'type': 'SPECTRUM'}];
 
 
 
-    $scope.windows = {
+
+
+    $scope.windows = [{
         'start': '2019-03-20 22:50:42',
-        'end': '2019-03-25 23:58:42'};
+        'end': '2019-03-25 23:58:42'}];
+
+    $scope.requests = [{
+        'acceptability_threshold': 90,
+        'configurations': $scope.configurations,
+        'location': {'telescope_class': '4m0'},
+        'windows': $scope.windows}];
+
+    $scope.request_group_general = {
+        'ipp_value': 1.05,
+        'name': 'test',
+        'observation_type': 'NORMAL',
+        'operator': 'SINGLE',
+        'proposal': 'NOAO2019B-9990'};
 
     create_request_group = function() {
-        $scope.request_group = {
-            'ipp_value': 1.05,
-            'name': 'test',
-            'observation_type': 'NORMAL',
-            'operator': 'SINGLE',
-            'proposal': 'NOAO2019B-9990',
-            'requests': [{
-                'acceptability_threshold': 90,
-                'configurations': [{
-                    'acquisition_config': {'mode': 'MANUAL'},
-                    'constraints': {'max_airmass': 1.6, 'min_lunar_distance': 30},
-                    'guiding_config': {'state': 'OPTIONAL'},
-                    'instrument_configs': [{
-                        'bin_x': 2,
-                        'bin_y': 2,
-                        'exposure_count': $scope.configuration.exposure_count,
-                        'exposure_time': $scope.configuration.exposure_time,
-                        'optical_elements': $scope.optical_elements
-                    }],
-                    'instrument_type': 'SOAR_GHTS_REDCAM',
-                    'target': $scope.target,
-                    'type': $scope.configuration.type}],
-                'location': {'telescope_class': '4m0'},
-                'windows': [$scope.windows]}]};
-    };
+        $scope.request_group = Object.assign(
+            $scope.request_group_general,
+            {'requests': $scope.requests})};
 
     $scope.post_data = function () {
         create_request_group();
+        console.log($scope.request_group);
+        return 0;
         $http({
             method: 'POST',
             url: '/api/requestgroups',
@@ -151,8 +167,19 @@ app.controller('addOneController', function($scope, $http, $location) {
         });
     };
 
+    $scope.add_one_configuration = function() {
+        var new_conf = angular.copy($scope.configurations.slice().reverse()[0]);
+        console.log(new_conf);
+        $scope.configurations.push(new_conf);
+        console.log($scope.configurations);
+    };
+
+    $scope.remove_configuration = function(conf) {
+        $scope.configurations.pop(conf);
+    };
+
     $scope.cancel = function() {
         $location.path('/');
-    }
+    };
 
 });

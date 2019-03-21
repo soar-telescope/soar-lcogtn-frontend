@@ -174,8 +174,8 @@ app.controller('addOneController', function($scope, $http, $location) {
         console.log($scope.configurations);
     };
 
-    $scope.remove_configuration = function(conf) {
-        $scope.configurations.pop(conf);
+    $scope.remove_configuration = function(index) {
+        $scope.configurations.splice(index, 1);
     };
 
     $scope.cancel = function() {

@@ -19,20 +19,53 @@ app.controller('indexController', function($scope, $http, $window) {
         }
 
     };
-
+    $scope.pag_total_items = 0;
+    $scope.pag_current_page = 1;
+    $scope.pag_items_per_page = 10;
+    $scope.pag_prev_page = 1;
     $scope.reqGroups = null;
 
+    // code is too ugly here
+    $scope.page_changed = function() {
+        console.log($scope.pag_current_page);
+        var params = null;
+        var new_offset = null;
+        var new_url = null;
+        if ($scope.pag_current_page - $scope.pag_prev_page === 1) {
+            $scope.get_data($scope.reqGroups.next);
+        } else if ($scope.pag_current_page - $scope.pag_prev_page === -1) {
+            $scope.get_data($scope.reqGroups.previous);
+        } else if ($scope.pag_current_page - $scope.pag_prev_page > 1) {
+            params = $scope.get_query_string_params($scope.reqGroups.next);
+            new_offset = ($scope.pag_current_page - $scope.pag_prev_page) * $scope.pag_items_per_page;
+            new_url = $scope.reqGroups.next.replace('offset='+ params.offset, 'offset=' + new_offset);
+            $scope.get_data(new_url);
 
-    $scope.get_data = function (next) {
+        } else if ($scope.pag_current_page - $scope.pag_prev_page < -1) {
+            params = $scope.get_query_string_params($scope.reqGroups.previous);
+            new_offset =  parseInt(params.offset) + (($scope.pag_current_page - $scope.pag_prev_page) + 1)* $scope.pag_items_per_page;
+            new_url = $scope.reqGroups.previous.replace('offset='+ params.offset, 'offset=' + new_offset);
+            $scope.get_data(new_url);
+        }
+        $scope.pag_prev_page = $scope.pag_current_page;
+    };
+
+    $scope.get_query_string_params = function(full_url) {
         var params = {};
-        if (next) {
-            var options =  next.split('?')[1].split('&');
-            options.forEach(function(pair) {
+        if (full_url) {
+
+            var options = full_url.split('?')[1].split('&');
+            options.forEach(function (pair) {
                 pair = pair.split('=');
                 params[pair[0]] = decodeURIComponent(pair[1] || '');
             });
-        };
+        }
+        return params;
+    };
 
+
+    $scope.get_data = function (next) {
+        var params = $scope.get_query_string_params(next);
         $http({
             method: 'GET',
             url: '/api/requestgroups/',
@@ -43,6 +76,7 @@ app.controller('indexController', function($scope, $http, $window) {
         }).then(function (res) {
             if (res.data.sucess) {
                 $scope.reqGroups = res.data.data;
+                $scope.pag_total_items = $scope.reqGroups.count;
                 if ($scope.current_active === null) {
                     $scope.current_active = $scope.reqGroups.count;
                 };
@@ -80,6 +114,12 @@ app.controller('indexController', function($scope, $http, $window) {
     };
 
     $scope.get_data();
+
+
+
+
+
+
 });
 
 

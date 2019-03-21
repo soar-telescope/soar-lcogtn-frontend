@@ -1,9 +1,12 @@
 
 
 <div class="container-fluid  m-0 p-0">
-    <h2> {{reqGroups.next}}</h2>
     <!--<div class="row">-->
-        <div class="card m-0 p-0">
+    <div class="ng-cloak" ng-if="!reqGroups">
+        <div class="justify-content-center spinner-border"></div>
+
+    </div>
+        <div class="card m-0 p-0 ng-cloak" ng-if="reqGroups">
             <div class="card-header bg-dark text-white">
                 <h3>Found {{reqGroups.count}} requests</h3>
             </div>
@@ -145,7 +148,17 @@
                 </div>
             </div>
             <div class="card-footer">
-                    <button class="btn btn-danger" ng-click="get_data(reqGroups.next)" >Next</button>
+                <div class="justify-content-center">
+                    <ul uib-pagination
+                        class="pagination-sm"
+                        ng-change="page_changed()"
+                        total-items="pag_total_items"
+                        items-per-page="pag_items_per_page"
+                        ng-model="pag_current_page">
+
+                    </ul>
+                </div>
+                    <!--<button class="btn btn-danger" ng-click="get_data(reqGroups.next)" >Next</button>-->
             </div>
         </div>
     <!--</div>-->

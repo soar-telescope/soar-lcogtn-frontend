@@ -23,13 +23,23 @@ app.controller('indexController', function($scope, $http, $window) {
     $scope.reqGroups = null;
 
 
-    $scope.get_data = function () {
+    $scope.get_data = function (next) {
+        var params = {};
+        if (next) {
+            var options =  next.split('?')[1].split('&');
+            options.forEach(function(pair) {
+                pair = pair.split('=');
+                params[pair[0]] = decodeURIComponent(pair[1] || '');
+            });
+        };
+
         $http({
             method: 'GET',
-            url: '/api/requestgroups',
+            url: '/api/requestgroups/',
             headers: {
                 'Authorization': 'Token ' + 'c377c2bfbaafd9089b12a1b3590fc8b0d39c5686'
-            }
+            },
+            params: JSON.parse(JSON.stringify(params))
         }).then(function (res) {
             if (res.data.sucess) {
                 $scope.reqGroups = res.data.data;

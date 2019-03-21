@@ -3,11 +3,12 @@ var router = express.Router();
 var request = require('request');
 
 
-router.get('/requestgroups', function (req, res) {
+router.get('/requestgroups/', function (req, res) {
     var token = getToken(req.headers);
     request.get({
         headers: {'Authorization': 'Token ' + token},
         url: 'https://observation-portal-dev.lco.global/api/requestgroups/',
+        qs: req.query,
         json: true}, function (error, response, data) {
         if (error) {
             throw error;

@@ -6,194 +6,266 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-sm-3 col-md-4">
                         <h3>General</h3>
-                        <div class="form-group">
-                            <label for="rg_ipp">IPP</label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="rg_ipp"
-                                   ng-model="request_group_general.ipp_value">
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="rg_ipp">IPP</label>
+                                    <input type="text"
+                                           class="form-control form-control-sm"
+                                           id="rg_ipp"
+                                           ng-model="request_group_general.ipp_value">
 
+                                </div>
+                                <div class="form-group">
+                                    <label for="rg_name">Name</label>
+                                    <input type="text"
+                                           class="form-control form-control-sm"
+                                           id="rg_name"
+                                           ng-model="request_group_general.name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="rg_observation_type">Observation Type</label>
+                                    <input type="text"
+                                           class="form-control form-control-sm"
+                                           id="rg_observation_type"
+                                           ng-model="request_group_general.observation_type">
+                                </div>
+                                <div class="form-group">
+                                    <label for="rg_operator">Operator</label>
+                                    <input type="text"
+                                           class="form-control form-control-sm"
+                                           id="rg_operator"
+                                           ng-model="request_group_general.operator">
+                                </div>
+                                <div class="form-group">
+                                    <label for="rg_proposal">Proposal</label>
+                                    <input type="text"
+                                           class="form-control form-control-sm"
+                                           id="rg_proposal"
+                                           ng-model="request_group_general.proposal">
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="rg_name">Name</label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="rg_name"
-                                   ng-model="request_group_general.name">
-                        </div>
-                        <div class="form-group">
-                            <label for="rg_observation_type">Observation Type</label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="rg_observation_type"
-                                   ng-model="request_group_general.observation_type">
-                        </div>
-                        <div class="form-group">
-                            <label for="rg_operator">Operator</label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="rg_operator"
-                                   ng-model="request_group_general.operator">
-                        </div>
-                        <div class="form-group">
-                            <label for="rg_proposal">Proposal</label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="rg_proposal"
-                                   ng-model="request_group_general.proposal">
-                        </div>
+
+
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-sm-3 col-md-4">
                         <h3>Target</h3>
-                        <div class="form-group">
-                            <label for="target_name">Name</label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="target_name"
-                                   ng-model="target.name">
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="target_name">Name</label>
+                                    <input type="text"
+                                           class="form-control form-control-sm"
+                                           id="target_name"
+                                           ng-model="target.name">
 
-                        </div>
-                        <div class="form-group">
-                            <label for="target_ra">RA</label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="target_ra"
-                                   ng-model="target.ra">
-                        </div>
-                        <div class="form-group">
-                            <label for="target_dec">DEC</label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="target_dec"
-                                   ng-model="target.dec">
-                        </div>
-                        <div class="form-group">
-                            <label for="target_proper_motion_ra">Proper Motion RA</label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="target_proper_motion_ra"
-                                   ng-model="target.proper_motion_ra">
-                        </div>
-                        <div class="form-group">
-                            <label for="target_proper_motion_dec">Proper Motion DEC</label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="target_proper_motion_dec"
-                                   ng-model="target.proper_motion_dec">
-                        </div>
-                        <div class="form-group">
-                            <label for="target_epoch">Epoch</label>
-                            <input type="text"
-                                   class="form-control"
-                                   id="target_epoch"
-                                   ng-model="target.epoch">
-                        </div>
-                        <div class="form-group">
-                            <label for="target_type">Type</label>
-                            <select class="form-control" id="target_type"
-                                    ng-options="targ_type for targ_type in target_types"
-                                    ng-model="target.type">
-                            </select>
-                        </div>
-                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="target_ra">RA</label>
+                                    <input type="text"
+                                           class="form-control form-control-sm"
+                                           id="target_ra"
+                                           ng-model="target.ra">
+                                </div>
+                                <div class="form-group">
+                                    <label for="target_dec">DEC</label>
+                                    <input type="text"
+                                           class="form-control form-control-sm"
+                                           id="target_dec"
+                                           ng-model="target.dec">
+                                </div>
+                                <!--<div class="row">-->
+                                    <!--<div class="col">-->
+                                        <!--Proper Motion-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<hr>-->
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="target_proper_motion_ra"
+                                                   title="Proper Motion Right Ascencion">PM RA</label>
+                                            <input type="text"
+                                                   class="form-control form-control-sm"
+                                                   id="target_proper_motion_ra"
+                                                   ng-model="target.proper_motion_ra">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="target_proper_motion_dec"
+                                                   title="Proper Motion Declination">PM DEC</label>
+                                            <input type="text"
+                                                   class="form-control form-control-sm"
+                                                   id="target_proper_motion_dec"
+                                                   ng-model="target.proper_motion_dec">
+                                        </div>
+                                    </div>
+                                </div>
 
-                    <div class="col-sm-3 col-md-4">
-                        <h3>Windows</h3>
-                        <div ng-repeat="window in windows">
-                            <div class="form-group">
-                                <label for="window_start">Start</label>
-                                <input type="text"
-                                       class="form-control"
-                                       id="window_start"
-                                       ng-model="window.start">
-                            </div>
-                            <div class="form-group">
-                                <label for="window_end">End</label>
-                                <input type="text"
-                                       class="form-control"
-                                       id="window_end"
-                                       ng-model="window.end">
-                            </div>
-                        </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="target_epoch">Epoch</label>
+                                            <input type="text"
+                                                   class="form-control form-control-sm"
+                                                   id="target_epoch"
+                                                   ng-model="target.epoch">
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                           <label for="target_type">Type</label>
+                                           <select class="form-control form-control-sm" id="target_type"
+                                                   ng-options="targ_type for targ_type in target_types"
+                                                   ng-model="target.type">
+                                           </select>
+                                        </div>
+                                    </div>
+                                </div>
 
 
+                             </div>
+                         </div>
                     </div>
                     <div class="col-sm-3 col-md-4">
                         <h3>Instrument Configurations</h3>
-                        <div ng-repeat="inst_conf in instrument_configs">
-                            <div class="form-group">
-                                <label for="inst_conf_opt_elem_grating">Grating</label>
-                                <input type="text"
-                                       class="form-control"
-                                       id="inst_conf_opt_elem_grating"
-                                       ng-model="inst_conf.optical_elements.grating">
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <div ng-repeat="inst_conf in instrument_configs">
+                                    <div class="form-group">
+                                        <label for="inst_conf_opt_elem_grating">Grating</label>
+                                        <input type="text"
+                                               class="form-control form-control-sm"
+                                               id="inst_conf_opt_elem_grating"
+                                               ng-model="inst_conf.optical_elements.grating">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inst_conf_opt_elem_slit">Slit</label>
+                                        <input type="text"
+                                               class="form-control form-control-sm"
+                                               id="inst_conf_opt_elem_slit"
+                                               ng-model="inst_conf.optical_elements.slit">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="inst_conf_exposure_time">Exposure Time</label>
+                                                <input type="text"
+                                                       class="form-control form-control-sm"
+                                                       id="inst_conf_exposure_time"
+                                                       ng-model="inst_conf.exposure_time">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="inst_conf_exposure_count">Exposure Count</label>
+                                                <input type="text"
+                                                       class="form-control form-control-sm"
+                                                       id="inst_conf_exposure_count"
+                                                       ng-model="inst_conf.exposure_count">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="inst_conf_rot_mode">Rotation Mode</label>
+                                                <input type="text"
+                                                       class="form-control form-control-sm"
+                                                       id="inst_conf_rot_mode"
+                                                       ng-model="inst_conf.rot_mode">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="inst_conf_extra_par_rot_angle">Rotation Angle</label>
+                                                <input type="text"
+                                                       class="form-control form-control-sm"
+                                                       id="inst_conf_extra_par_rot_angle"
+                                                       ng-model="inst_conf.extra_params.rot_angle">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="inst_conf_bin_x">Binning X</label>
+                                                <input type="text"
+                                                       class="form-control form-control-sm"
+                                                       id="inst_conf_bin_x"
+                                                       ng-model="inst_conf.bin_x">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="inst_conf_bin_y">Binning Y</label>
+                                                <input type="text"
+                                                       class="form-control form-control-sm"
+                                                       id="inst_conf_bin_y"
+                                                       ng-model="inst_conf.bin_y">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="inst_conf_opt_elem_slit">Slit</label>
-                                <input type="text"
-                                       class="form-control"
-                                       id="inst_conf_opt_elem_slit"
-                                       ng-model="inst_conf.optical_elements.slit">
-                            </div>
-                            <div class="form-group">
-                                <label for="inst_conf_exposure_time">Exposure Time</label>
-                                <input type="text"
-                                       class="form-control"
-                                       id="inst_conf_exposure_time"
-                                       ng-model="inst_conf.exposure_time">
-                            </div>
-                            <div class="form-group">
-                                <label for="inst_conf_exposure_count">Exposure Count</label>
-                                <input type="text"
-                                       class="form-control"
-                                       id="inst_conf_exposure_count"
-                                       ng-model="inst_conf.exposure_count">
-                            </div>
-                            <div class="form-group">
-                                <label for="inst_conf_rot_mode">Rotation Mode</label>
-                                <input type="text"
-                                       class="form-control"
-                                       id="inst_conf_rot_mode"
-                                       ng-model="inst_conf.rot_mode">
-                            </div>
-                            <div class="form-group">
-                                <label for="inst_conf_extra_par_rot_angle">Rotation Angle</label>
-                                <input type="text"
-                                       class="form-control"
-                                       id="inst_conf_extra_par_rot_angle"
-                                       ng-model="inst_conf.extra_params.rot_angle">
-                            </div>
-                            <div class="form-group">
-                                <label for="inst_conf_bin_x">Binning X</label>
-                                <input type="text"
-                                       class="form-control"
-                                       id="inst_conf_bin_x"
-                                       ng-model="inst_conf.bin_x">
-                            </div>
-                            <div class="form-group">
-                                <label for="inst_conf_bin_y">Binning Y</label>
-                                <input type="text"
-                                       class="form-control"
-                                       id="inst_conf_bin_y"
-                                       ng-model="inst_conf.bin_y">
-                            </div>
-
                         </div>
+
                     </div>
 
                 </div>
+                <hr>
                 <div class="row">
-                    <h3>Configurations</h3>
-                    <button class="btn btn-primary m-1"
-                            ng-click="add_one_configuration()">+1</button>
+                    <div class="col-sm-3 col-md-4">
+                        <h3>Windows
+                            <button class="btn btn-outline-primary"
+                                    ng-click="add_one_window()">+1</button>
+
+                        </h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3 col-md-4" ng-repeat="window in windows">
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <button type="button"
+                                            class="close ng-cloak"
+                                            ng-click="remove_window($index)"
+                                            ng-if="windows.length > 1">x</button>
+
+                                    <div class="form-group">
+                                        <label for="window_start">Start</label>
+                                        <input type="text"
+                                               class="form-control form-control-sm"
+                                               id="window_start"
+                                               ng-model="window.start">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="window_end">End</label>
+                                        <input type="text"
+                                               class="form-control form-control-sm"
+                                               id="window_end"
+                                               ng-model="window.end">
+                                    </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col col-sm-3 col-md-4">
+                        <h3>Configurations
+                                <button class="btn btn-outline-primary"
+                                        ng-click="add_one_configuration()">+1</button>
+                        </h3>
+                    </div>
                 </div>
                 <div class="row">
                         <div class="col col-sm-3 col-md-4" ng-repeat="conf in configurations">
-                            <div class="card">
+                            <div class="card mb-2">
                                 <div class="card-body">
                                     <button type="button"
                                             class="close ng-cloak"
@@ -201,7 +273,7 @@
                                             ng-if="configurations.length > 1">x</button>
                                     <div class="form-group">
                                         <label for="configuration_type">Type</label>
-                                        <select class="form-control" id="configuration_type"
+                                        <select class="form-control form-control-sm" id="configuration_type"
                                                 ng-options="conf_opt for conf_opt in configuration_types"
                                                 ng-model="conf.type">
                                         </select>
@@ -209,35 +281,35 @@
                                     <div class="form-group">
                                         <label for="configuration_instrument_type">Instrument Type</label>
                                         <input type="text"
-                                               class="form-control"
+                                               class="form-control form-control-sm"
                                                id="configuration_instrument_type"
                                                ng-model="conf.instrument_type">
                                     </div>
                                     <div class="form-group">
                                         <label for="configuration_guiding_config">Guiding Configuration</label>
                                         <input type="text"
-                                               class="form-control"
+                                               class="form-control form-control-sm"
                                                id="configuration_guiding_config"
                                                ng-model="conf.guiding_config.state">
                                     </div>
                                     <div class="form-group">
                                         <label for="configuration_constraints_max_airmass">Maximum Airmass</label>
                                         <input type="text"
-                                               class="form-control"
+                                               class="form-control form-control-sm"
                                                id="configuration_constraints_max_airmass"
                                                ng-model="conf.constraints.max_airmass">
                                     </div>
                                     <div class="form-group">
                                         <label for="configuration_constraints_min_lunar_distance">Minimum Lunar Distance</label>
                                         <input type="text"
-                                               class="form-control"
+                                               class="form-control form-control-sm"
                                                id="configuration_constraints_min_lunar_distance"
                                                ng-model="conf.constraints.min_lunar_distance">
                                     </div>
                                     <div class="form-group">
                                         <label for="configuration_acquisition_config_mode">Aquisition Configuration Mode</label>
                                         <input type="text"
-                                               class="form-control"
+                                               class="form-control form-control-sm"
                                                id="configuration_acquisition_config_mode"
                                                ng-model="conf.acquisition_config.mode">
                                      </div>

@@ -169,13 +169,20 @@ app.controller('addOneController', function($scope, $http, $location) {
 
     $scope.add_one_configuration = function() {
         var new_conf = angular.copy($scope.configurations.slice().reverse()[0]);
-        console.log(new_conf);
         $scope.configurations.push(new_conf);
-        console.log($scope.configurations);
     };
 
     $scope.remove_configuration = function(index) {
         $scope.configurations.splice(index, 1);
+    };
+
+    $scope.add_one_window = function() {
+        var new_window = angular.copy($scope.windows.slice().reverse()[0]);
+        $scope.windows.push(new_window);
+    };
+
+    $scope.remove_window = function(index) {
+        $scope.windows.splice(index, 1);
     };
 
     $scope.cancel = function() {

@@ -195,7 +195,10 @@
                         <div class="col col-sm-3 col-md-4" ng-repeat="conf in configurations">
                             <div class="card">
                                 <div class="card-body">
-                                    <button type="button" class="close" ng-click="remove_configuration(conf)">x</button>
+                                    <button type="button"
+                                            class="close ng-cloak"
+                                            ng-click="remove_configuration(conf)"
+                                            ng-if="configurations.length > 1">x</button>
                                     <div class="form-group">
                                         <label for="configuration_type">Type</label>
                                         <select class="form-control" id="configuration_type"

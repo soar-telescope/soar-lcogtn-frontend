@@ -244,24 +244,37 @@
                                             ng-click="remove_window($index)"
                                             ng-if="windows.length > 1">x</button>
 
-                                    <div class="form-group">
+                                    <div class="dropdown form-group dropdow-start-parent">
                                         <label for="window_start">Start</label>
-                                        <input type="text"
-                                               class="form-control form-control-sm"
-                                               uib-datepicker-popup
-                                               ng-required="true"
-                                               close-text="Close"
-                                               id="window_start"
-                                               ng-model="window.start">
-                                        <span class="button"
+                                        <!--<div class="input-group" id="window_start">-->
+                                                <div class="dropdown" id="window_start">
+                                                    <a class="dropdown-toggle" id="dropdown_start" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                                        <input type="text"
+                                                               class="form-control form-control-sm"
+                                                               value="{{ window.start | date: 'yyyy-MM-dd HH:mm:ss'}}">
+                                                    </a>
+                                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                        <datetimepicker data-ng-model="window.start" data-datetimepicker-config="{minView: 'hour'}"/>
+                                                    </ul>
+                                                </div>
+
                                     </div>
-                                    <div class="form-group">
+                                <div class="dropdown form-group dropdow-start-parent">
                                         <label for="window_end">End</label>
-                                        <input type="text"
-                                               class="form-control form-control-sm"
-                                               id="window_end"
-                                               ng-model="window.end">
+                                        <!--<div class="input-group" id="window_start">-->
+                                                <div class="dropdown" id="window_end">
+                                                    <a class="dropdown-toggle" id="dropdown_end" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                                        <input type="text"
+                                                               class="form-control form-control-sm"
+                                                               value="{{ window.end | date: 'yyyy-MM-dd HH:mm:ss'}}">
+                                                    </a>
+                                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                        <datetimepicker data-ng-model="window.end" data-datetimepicker-config="{minView: 'hour'}"/>
+                                                    </ul>
+                                                </div>
+
                                     </div>
+
                             </div>
                         </div> 
                     </div>

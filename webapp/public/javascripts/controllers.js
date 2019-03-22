@@ -276,6 +276,15 @@ app.controller('addOneController', function($scope, $http, $location) {
         }, function(err) {
             console.log(err);
         });
+    };
+
+    // date picker
+    $scope.date_picker_popup = {
+        opened: false
+    };
+
+    $scope.open_date_picker = function () {
+        $scope.date_picker_popup.opened = true;
     }
 
 

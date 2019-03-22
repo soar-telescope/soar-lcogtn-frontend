@@ -77,8 +77,15 @@ router.get('/simbad/', function (req, res)  {
             console.log(new_data);
         }
 
+        var proper_motions = component.filter(line => line.includes('Proper motions:'));
+        if (proper_motions.length === 1) {
+            new_data.proper_motion_ra = proper_motions[0].split(':')[1].split(' ')[1];
+            new_data.proper_motion_dec = proper_motions[0].split(':')[1].split(' ')[2];
+        }
+
 
         // console.log(coords);
+        console.log(new_data);
         res.json({sucess: true, data: new_data});
     })
 })

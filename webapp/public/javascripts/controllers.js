@@ -266,6 +266,8 @@ app.controller('addOneController', function($scope, $http, $location) {
                 $scope.target.ra = res.data.data.ra;
                 $scope.target.dec = res.data.data.dec;
                 $scope.target.epoch = res.data.data.epoch;
+                $scope.target.proper_motion_ra = res.data.data.proper_motion_ra;
+                $scope.target.proper_motion_dec = res.data.data.proper_motion_dec;
             } else {
                 console.log("error");
                 console.log(res);

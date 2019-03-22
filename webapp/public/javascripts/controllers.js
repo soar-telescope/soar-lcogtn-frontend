@@ -252,4 +252,30 @@ app.controller('addOneController', function($scope, $http, $location) {
         $location.path('/');
     };
 
+    // simbad query
+    $scope.simbad_query = function(){
+        var query_params = {'id': $scope.target.name};
+
+        $http({
+            method: 'GET',
+            url: '/api/simbad/',
+            params: JSON.parse(JSON.stringify(query_params))
+        }).then(function (res) {
+            if (res.data.sucess) {
+                console.log(res.data)
+                $scope.target.ra = res.data.data.ra;
+                $scope.target.dec = res.data.data.dec;
+                $scope.target.epoch = res.data.data.epoch;
+            } else {
+                console.log("error");
+                console.log(res);
+            }
+
+        }, function(err) {
+            console.log(err);
+        });
+    }
+
+
+
 });

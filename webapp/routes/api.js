@@ -51,6 +51,38 @@ router.delete('/requestgroups/:id', function (req, res) {
 
 });
 
+router.get('/simbad/', function (req, res)  {
+    var new_data = {};
+    var qs = {
+        'output.format': 'ASCII',
+        'Ident': req.query.id};
+    request.get({
+        url: 'http://simbad.u-strasbg.fr/simbad/sim-id',
+        qs: qs,
+        json: true}, function (error, response, data) {
+        if (error) {
+            throw error;
+        }
+        var component = data.split('\n');
+        var coords = component.filter(line => line.includes('Coordinates(ICRS'));
+        if (coords.length === 1)  {
+            coords = coords[0].split(':');
+            // get references
+            var coords_ref = coords[0].replace('Coordinates(', '').replace(')', '').split(',');
+            new_data.epoch = coords_ref[1].split('=')[1];
+            new_data.equinox = coords_ref[2].split('=')[1];
+            // get coordinates
+            new_data.ra = coords[1].split(' ').slice(1, 4).join(':');
+            new_data.dec = coords[1].split(' ').slice(5, 8).join(':');
+            console.log(new_data);
+        }
+
+
+        // console.log(coords);
+        res.json({sucess: true, data: new_data});
+    })
+})
+
 getToken = function(headers) {
     if (headers && headers.authorization) {
         var parted = headers.authorization.split(' ');

@@ -26,26 +26,28 @@
                                            ng-model="request_group_general.name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="rg_observation_type">Observation Type</label>
-                                    <input type="text"
-                                           class="form-control form-control-sm"
-                                           id="rg_observation_type"
-                                           ng-model="request_group_general.observation_type">
-                                </div>
-                                <div class="form-group">
-                                    <label for="rg_operator">Operator</label>
-                                    <input type="text"
-                                           class="form-control form-control-sm"
-                                           id="rg_operator"
-                                           ng-model="request_group_general.operator">
-                                </div>
-                                <div class="form-group">
                                     <label for="rg_proposal">Proposal</label>
                                     <input type="text"
                                            class="form-control form-control-sm"
                                            id="rg_proposal"
                                            ng-model="request_group_general.proposal">
                                 </div>
+                                <div class="form-group">
+                                    <label for="rg_observation_type">Observation Type</label>
+                                    <select class="form-control form-control-sm" id="rg_observation_type"
+                                            ng-options="obs_type for obs_type in observation_types"
+                                            ng-model="request_group_general.observation_type">
+                                    </select>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="rg_operator">Operator</label>
+                                    <select class="form-control form-control-sm" id="rg_operator"
+                                            ng-options="operator for operator in operator_options"
+                                            ng-model="request_group_general.operator">
+                                    </select>
+                                </div>
+
                             </div>
                         </div>
 
@@ -77,12 +79,6 @@
                                            id="target_dec"
                                            ng-model="target.dec">
                                 </div>
-                                <!--<div class="row">-->
-                                    <!--<div class="col">-->
-                                        <!--Proper Motion-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                                <!--<hr>-->
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
@@ -138,17 +134,17 @@
                                 <div ng-repeat="inst_conf in instrument_configs">
                                     <div class="form-group">
                                         <label for="inst_conf_opt_elem_grating">Grating</label>
-                                        <input type="text"
-                                               class="form-control form-control-sm"
-                                               id="inst_conf_opt_elem_grating"
-                                               ng-model="inst_conf.optical_elements.grating">
+                                        <select class="form-control form-control-sm" id="inst_conf_opt_elem_grating"
+                                                ng-options="grating for grating in gratings"
+                                                ng-model="inst_conf.optical_elements.grating">
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="inst_conf_opt_elem_slit">Slit</label>
-                                        <input type="text"
-                                               class="form-control form-control-sm"
-                                               id="inst_conf_opt_elem_slit"
-                                               ng-model="inst_conf.optical_elements.slit">
+                                        <select class="form-control form-control-sm" id="inst_conf_opt_elem_slit"
+                                                ng-options="slit for slit in slits"
+                                                ng-model="inst_conf.optical_elements.slit">
+                                        </select>
                                     </div>
                                     <div class="row">
                                         <div class="col">
@@ -174,10 +170,11 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="inst_conf_rot_mode">Rotation Mode</label>
-                                                <input type="text"
-                                                       class="form-control form-control-sm"
-                                                       id="inst_conf_rot_mode"
-                                                       ng-model="inst_conf.rot_mode">
+                                                <select class="form-control form-control-sm"
+                                                        id="inst_conf_rot_mode"
+                                                        ng-options="rot_mode for rot_mode in rot_modes"
+                                                        ng-model="inst_conf.rot_mode">
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col">
@@ -194,19 +191,29 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="inst_conf_bin_x">Binning X</label>
-                                                <input type="text"
-                                                       class="form-control form-control-sm"
-                                                       id="inst_conf_bin_x"
-                                                       ng-model="inst_conf.bin_x">
+                                                <select class="form-control form-control-sm"
+                                                        id="inst_conf_bin_x"
+                                                        ng-options="binning for binning in [1, 2, 3]"
+                                                        ng-model="inst_conf.bin_x">
+                                                </select>
+                                                <!--<input type="text"-->
+                                                       <!--class="form-control form-control-sm"-->
+                                                       <!--id="inst_conf_bin_x"-->
+                                                       <!--ng-model="inst_conf.bin_x">-->
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="inst_conf_bin_y">Binning Y</label>
-                                                <input type="text"
-                                                       class="form-control form-control-sm"
-                                                       id="inst_conf_bin_y"
-                                                       ng-model="inst_conf.bin_y">
+                                                <select class="form-control form-control-sm"
+                                                        id="inst_conf_bin_y"
+                                                        ng-options="binning for binning in [1, 2, 3]"
+                                                        ng-model="inst_conf.bin_y">
+                                                </select>
+                                                <!--<input type="text"-->
+                                                       <!--class="form-control form-control-sm"-->
+                                                       <!--id="inst_conf_bin_y"-->
+                                                       <!--ng-model="inst_conf.bin_y">-->
                                             </div>
                                         </div>
                                     </div>
@@ -280,18 +287,36 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="configuration_instrument_type">Instrument Type</label>
-                                        <input type="text"
-                                               class="form-control form-control-sm"
-                                               id="configuration_instrument_type"
-                                               ng-model="conf.instrument_type">
+                                        <select class="form-control form-control-sm"
+                                                id="configuration_instrument_type"
+                                                ng-options="instrument for instrument in instrument_type"
+                                                ng-model="conf.instrument_type">
+                                        </select>
+                                        <!--<input type="text"-->
+                                               <!--class="form-control form-control-sm"-->
+                                               <!--id="configuration_instrument_type"-->
+                                               <!--ng-model="conf.instrument_type">-->
                                     </div>
                                     <div class="form-group">
                                         <label for="configuration_guiding_config">Guiding Configuration</label>
-                                        <input type="text"
-                                               class="form-control form-control-sm"
-                                               id="configuration_guiding_config"
-                                               ng-model="conf.guiding_config.state">
+                                        <select class="form-control form-control-sm"
+                                                id="configuration_guiding_config"
+                                                ng-options="guiding_config for guiding_config in guiding_configs"
+                                                ng-model="conf.guiding_config.state">
+                                        </select>
+                                        <!--<input type="text"-->
+                                               <!--class="form-control form-control-sm"-->
+                                               <!--id="configuration_guiding_config"-->
+                                               <!--ng-model="conf.guiding_config.state">-->
                                     </div>
+                                    <div class="form-group">
+                                        <label for="configuration_acquisition_config_mode">Aquisition Configuration Mode</label>
+                                        <select class="form-control form-control-sm"
+                                                id="configuration_acquisition_config_mode"
+                                                ng-options="conf for conf in acquisition_config_modes"
+                                                ng-model="conf.acquisition_config.mode">
+                                        </select>
+                                     </div>
                                     <div class="form-group">
                                         <label for="configuration_constraints_max_airmass">Maximum Airmass</label>
                                         <input type="text"
@@ -306,13 +331,6 @@
                                                id="configuration_constraints_min_lunar_distance"
                                                ng-model="conf.constraints.min_lunar_distance">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="configuration_acquisition_config_mode">Aquisition Configuration Mode</label>
-                                        <input type="text"
-                                               class="form-control form-control-sm"
-                                               id="configuration_acquisition_config_mode"
-                                               ng-model="conf.acquisition_config.mode">
-                                     </div>
                                 </div>
                             </div>
 

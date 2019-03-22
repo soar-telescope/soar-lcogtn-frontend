@@ -129,6 +129,14 @@ app.controller('indexController', function($scope, $http, $window) {
 
 
 app.controller('addOneController', function($scope, $http, $location) {
+    $scope.observation_types = ['NORMAL'];
+    $scope.operator_options = ['SINGLE'];
+    $scope.gratings = ['SYZY_400'];
+    $scope.slits = ['slit_1.0as'];
+    $scope.rot_modes = ['SKY'];
+    $scope.instrument_type = ['SOAR_GHTS_REDCAM'];
+    $scope.guiding_configs = ['OPTIONAL'];
+    $scope.acquisition_config_modes = ['MANUAL'];
     $scope.configuration_types = ['SPECTRUM', 'ARC', 'LAMP_FLAT'];
     $scope.target_types = ['SIDEREAL', 'NON-SIDEREAL'];
     $scope.rot_modes = ['SKY', 'FLOAT', 'VERTICAL', 'VFLOAT'];

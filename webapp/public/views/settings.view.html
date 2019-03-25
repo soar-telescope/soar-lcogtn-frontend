@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h2>Settings</h2>
+        </div>
+        <div class="card-body">
+            <form>
+                <div class="form-group">
+                    <label for="token" class="m-2">Token:</label>
+                    <input type="text"
+                           id="token"
+                           class="form-control form-control-sm m-2"
+                           ng-model="new_token">
+                    <button class="btn btn-primary float-right"
+                            ng-click="add_token()"
+                            ng-disabled="new_token === ''">Add new token</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>

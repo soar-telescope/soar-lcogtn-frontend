@@ -9,18 +9,37 @@ app.controller('mainController', function ($scope, $location) {
 });
 
 app.controller('settingsController', function($scope, $window) {
-   console.log('Settings Controlller');
    $scope.new_token = '';
    $scope.add_token = function() {
        // c377c2bfbaafd9089b12a1b3590fc8b0d39c5686
-       window.localStorage.setItem('lcoToken', 'Token ' + $scope.new_token);
+       $window.localStorage.setItem('lcoToken', 'Token ' + $scope.new_token);
        // console.log($scope.new_token);
+   };
+
+   $scope.token_exist = function () {
+
+       if ($window.localStorage.getItem('lcoToken')) {
+           var token = $window.localStorage.getItem('lcoToken').split(' ');
+           if (token.length === 2 && token[0] === 'Token') {
+               return true
+           } else {
+               return false
+           }
+       } else {
+           return false
+       }
+
 
    };
+
+   $scope.delete_token = function () {
+       $window.localStorage.removeItem('lcoToken');
+   }
 });
 
 app.controller('indexController', function($scope, $http, $window) {
     $scope.current_active = null;
+    $scope.message = '';
     $scope.is_active = function(id) {
         return $scope.current_active === id;
     };
@@ -85,6 +104,8 @@ app.controller('indexController', function($scope, $http, $window) {
 
     $scope.get_data = function (next) {
         var params = $scope.get_query_string_params(next);
+        console.log(params);
+        console.log($window.localStorage.getItem('lcoToken'));
         $http({
             method: 'GET',
             url: '/api/requestgroups/',
@@ -93,15 +114,16 @@ app.controller('indexController', function($scope, $http, $window) {
             },
             params: JSON.parse(JSON.stringify(params))
         }).then(function (res) {
-            if (res.data.sucess) {
+            if (res.data.success) {
                 $scope.reqGroups = res.data.data;
                 $scope.pagination.total_items = $scope.reqGroups.count;
                 if ($scope.current_active === null) {
                     $scope.current_active = $scope.reqGroups.count;
                 }
             } else {
-                console.log("error");
-                console.log(res);
+                // console.log("error");
+                // console.log(res);
+                $scope.message = res.data.msg;
             }
 
         }, function(err) {
@@ -119,7 +141,7 @@ app.controller('indexController', function($scope, $http, $window) {
                 'Authorization': $window.localStorage.getItem('lcoToken')
             },
         }).then(function (res) {
-            if (res.data.sucess) {
+            if (res.data.success) {
                 $scope.get_data();
                 console.log(res.data.data);
             } else {
@@ -133,11 +155,6 @@ app.controller('indexController', function($scope, $http, $window) {
     };
 
     $scope.get_data();
-
-
-
-
-
 
 });
 
@@ -231,7 +248,7 @@ app.controller('addOneController', function($scope, $http, $location) {
             },
             data: $scope.request_group
         }).then(function (res) {
-            if (res.data.sucess) {
+            if (res.data.success) {
                 // console.log(res.data.data);
                 $location.path('/');
             } else {
@@ -275,7 +292,7 @@ app.controller('addOneController', function($scope, $http, $location) {
             url: '/api/simbad/',
             params: JSON.parse(JSON.stringify(query_params))
         }).then(function (res) {
-            if (res.data.sucess) {
+            if (res.data.success) {
                 $scope.target.ra = res.data.data.ra;
                 $scope.target.dec = res.data.data.dec;
                 $scope.target.epoch = res.data.data.epoch;

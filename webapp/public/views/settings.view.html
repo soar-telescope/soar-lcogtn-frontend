@@ -5,16 +5,39 @@
         </div>
         <div class="card-body">
             <form>
-                <div class="form-group">
-                    <label for="token" class="m-2">Token:</label>
-                    <input type="text"
-                           id="token"
-                           class="form-control form-control-sm m-2"
-                           ng-model="new_token">
-                    <button class="btn btn-primary float-right"
-                            ng-click="add_token()"
-                            ng-disabled="new_token === ''">Add new token</button>
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="form-group">
+                        <label for="token" class="m-2">Token:</label>
+                        <input type="text"
+                               id="token"
+                               class="form-control form-control-sm m-2"
+                               ng-model="new_token">
+                        <button class="btn btn-primary float-right"
+                                ng-click="add_token()"
+                                ng-disabled="new_token === ''">Add new token</button>
+
+                    </div>
+                    </div>
+
                 </div>
+                <hr ng-if="token_exist()">
+                <div class="row" ng-if="token_exist()">
+                    <div class="col">
+                        <div class="text-center">
+                            <div class="form-group">
+                        <label for="button-delete">A token already exists, if you want to delete or renew it press the button to the right.</label>
+                        <button class="btn btn-danger"
+                                id="button-delete"
+                                ng-click="delete_token()">Delete Token</button>
+                    </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
 
             </form>
 

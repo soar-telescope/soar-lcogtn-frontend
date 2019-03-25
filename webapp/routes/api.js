@@ -14,7 +14,7 @@ router.get('/requestgroups/', function (req, res) {
             throw error;
         }
         // console.log(response);
-        res.json({sucess: true, data: data});
+        res.json({success: true, data: data});
     })
 });
 
@@ -29,7 +29,7 @@ router.post('/requestgroups', function (req, res) {
         if (error) {
             throw error;
         }
-        res.json({sucess: true, msg: 'OK', data: data});
+        res.json({success: true, msg: 'OK', data: data});
     });
 });
 
@@ -46,7 +46,7 @@ router.delete('/requestgroups/:id', function (req, res) {
             throw error;
         }
         // console.log();
-        res.json({sucess: true, msg: 'OK', data: data});
+        res.json({success: true, msg: 'OK', data: data});
     });
 
 });
@@ -86,9 +86,9 @@ router.get('/simbad/', function (req, res)  {
 
         // console.log(coords);
         console.log(new_data);
-        res.json({sucess: true, data: new_data});
+        res.json({success: true, data: new_data});
     })
-})
+});
 
 getToken = function(headers) {
     if (headers && headers.authorization) {

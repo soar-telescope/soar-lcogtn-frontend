@@ -1,8 +1,22 @@
 var app = angular.module('requestGroupsApp');
 
-app.controller('mainController', function ($scope) {
+app.controller('mainController', function ($scope, $location) {
     $scope.page_title = 'SOAR-LCO Interface';
     console.log('Loading main controller');
+    $scope.settings = function () {
+        $location.path('/settings');
+    }
+});
+
+app.controller('settingsController', function($scope, $window) {
+   console.log('Settings Controlller');
+   $scope.new_token = '';
+   $scope.add_token = function() {
+       // c377c2bfbaafd9089b12a1b3590fc8b0d39c5686
+       window.localStorage.setItem('lcoToken', 'Token ' + $scope.new_token);
+       // console.log($scope.new_token);
+
+   };
 });
 
 app.controller('indexController', function($scope, $http, $window) {
@@ -75,7 +89,7 @@ app.controller('indexController', function($scope, $http, $window) {
             method: 'GET',
             url: '/api/requestgroups/',
             headers: {
-                'Authorization': 'Token ' + 'c377c2bfbaafd9089b12a1b3590fc8b0d39c5686'
+                'Authorization':  $window.localStorage.getItem('lcoToken')
             },
             params: JSON.parse(JSON.stringify(params))
         }).then(function (res) {
@@ -102,7 +116,7 @@ app.controller('indexController', function($scope, $http, $window) {
             method: 'DELETE',
             url: '/api/requestgroups/' + group.id,
             headers: {
-                'Authorization': 'Token ' + 'c377c2bfbaafd9089b12a1b3590fc8b0d39c5686'
+                'Authorization': $window.localStorage.getItem('lcoToken')
             },
         }).then(function (res) {
             if (res.data.sucess) {
@@ -213,7 +227,7 @@ app.controller('addOneController', function($scope, $http, $location) {
             method: 'POST',
             url: '/api/requestgroups',
             headers: {
-                'Authorization': 'Token ' + 'c377c2bfbaafd9089b12a1b3590fc8b0d39c5686'
+                'Authorization': $window.localStorage.getItem('lcoToken')
             },
             data: $scope.request_group
         }).then(function (res) {
@@ -262,7 +276,6 @@ app.controller('addOneController', function($scope, $http, $location) {
             params: JSON.parse(JSON.stringify(query_params))
         }).then(function (res) {
             if (res.data.sucess) {
-                console.log(res.data)
                 $scope.target.ra = res.data.data.ra;
                 $scope.target.dec = res.data.data.dec;
                 $scope.target.epoch = res.data.data.epoch;

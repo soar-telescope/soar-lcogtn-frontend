@@ -5,10 +5,13 @@ app.config(function ($routeProvider, $locationProvider) {
         .when("/", {
         templateUrl: '/views/index.view.html',
         controller: 'indexController'
-    })
+        })
         .when('/addone', {
             templateUrl: '/views/addone.view.html',
             controller: 'addOneController'
+        }).when('/settings', {
+            templateUrl: '/views/settings.view.html',
+            controller: 'settingsController'
         })
         .otherwise({redirectTo: '/'});
 

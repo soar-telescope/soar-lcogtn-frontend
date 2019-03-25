@@ -49,20 +49,20 @@
                     <li class="nav-item m-1 ng-cloak">
                         <a class="nav-link"  data-toggle="tab" href="/addone">Add One</a>
                     </li>
-                    <li class="nav-item m-1 ng-cloak" ng-if="username">
-                        <a class="nav-link"  data-toggle="tab" href="/settings">Settings</a>
-                    </li>
+                    <!--<li class="nav-item m-1 ng-cloak">-->
+                        <!--<a class="nav-link"  data-toggle="tab" href="/settings">Settings</a>-->
+                    <!--</li>-->
                 </ul>
             </div>
             <div class="navbar-nav">
                 <ul class="navbar-nav float-lg-right">
-                    <li class="nav-item m-1">
-                        <button class="btn btn-outline-primary"
-                                ng-if="username"
-                                type="button">
-                                <span class="fa fa-user"> {{ username }} </span>
-                        </button>
-                     </li>
+                    <!--<li class="nav-item m-1">-->
+                        <!--<button class="btn btn-outline-primary"-->
+                                <!--ng-if="username"-->
+                                <!--type="button">-->
+                                <!--<span class="fa fa-user"> {{ username }} </span>-->
+                        <!--</button>-->
+                     <!--</li>-->
                     <li class="nav-item m-1">
                         <button class="btn btn-dark"
                                 ng-click="settings()"
@@ -70,21 +70,21 @@
                                 <span class="fa fa-cog"> Settings </span>
                         </button>
                      </li>
-                     <li class="nav-item m-1">
-                        <button class="btn btn-primary"
-                                ng-hide="isSignedIn()"
-                                type="button"
-                                ng-click="showSignin()">
-                                <span class="fa fa-sign-in"> Sign In </span>
-                        </button>
-                        <button class="btn btn-danger"
-                                ng-show="isSignedIn()"
-                                type="button"
-                                ng-click="signout()">
-                                <span class="fa fa-sign-out"> Sign Out </span>
-                        </button>
+                     <!--<li class="nav-item m-1">-->
+                        <!--<button class="btn btn-primary"-->
+                                <!--ng-hide="isSignedIn()"-->
+                                <!--type="button"-->
+                                <!--ng-click="showSignin()">-->
+                                <!--<span class="fa fa-sign-in"> Sign In </span>-->
+                        <!--</button>-->
+                        <!--<button class="btn btn-danger"-->
+                                <!--ng-show="isSignedIn()"-->
+                                <!--type="button"-->
+                                <!--ng-click="signout()">-->
+                                <!--<span class="fa fa-sign-out"> Sign Out </span>-->
+                        <!--</button>-->
 
-                     </li>
+                     <!--</li>-->
                 </ul>
             </div>
         </div>

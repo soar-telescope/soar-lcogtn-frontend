@@ -239,41 +239,57 @@
                     <div class="col-sm-3 col-md-4" ng-repeat="window in windows">
                         <div class="card mb-2">
                             <div class="card-body">
-                                <button type="button"
-                                            class="close ng-cloak"
-                                            ng-click="remove_window($index)"
-                                            ng-if="windows.length > 1">x</button>
+                                <div class="form-group">
+                                     <button type="button"
+                                             class="close ng-cloak"
+                                             ng-click="remove_window($index)"
+                                             ng-if="windows.length > 1">x</button>
+                                </div>
 
-                                    <div class="dropdown form-group dropdow-start-parent">
+
+                                <div class="form-group">
+                                    <div class="dropdown">
                                         <label for="window_start">Start</label>
-                                        <!--<div class="input-group" id="window_start">-->
-                                                <div class="dropdown" id="window_start">
-                                                    <a class="dropdown-toggle" id="dropdown_start" role="button" data-toggle="dropdown" data-target="#" href="#">
-                                                        <input type="text"
-                                                               class="form-control form-control-sm"
-                                                               value="{{ window.start | date: 'yyyy-MM-dd HH:mm:ss'}}">
-                                                    </a>
-                                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                                        <datetimepicker data-ng-model="window.start" data-datetimepicker-config="{minView: 'hour'}"/>
-                                                    </ul>
-                                                </div>
+                                        <div class="dropdown" id="window_start">
+                                            <a class="dropdown-toggle"
+                                               id="dropdown_start"
+                                               role="button"
+                                               data-toggle="dropdown"
+                                               data-target="#"
+                                               href="#">
+                                                <input type="text"
+                                                       class="form-control form-control-sm"
+                                                       value="{{ window.start | date: 'yyyy-MM-dd HH:mm:ss'}}">
+                                            </a>
+                                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                <datetimepicker data-ng-model="window.start" data-datetimepicker-config="{minView: 'hour'}"/>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="dropdown">
+                                        <div class="dropdown" id="window_end">
+                                            <label for="window_end">End</label>
+                                            <a class="dropdown-toggle"
+                                               id="dropdown_end"
+                                               role="button"
+                                               data-toggle="dropdown"
+                                               data-target="#"
+                                               href="#">
+                                                <input type="text"
+                                                       class="form-control form-control-sm"
+                                                       value="{{ window.end | date: 'yyyy-MM-dd HH:mm:ss'}}">
+                                            </a>
+                                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                <datetimepicker data-ng-model="window.end" data-datetimepicker-config="{minView: 'hour'}"/>
+                                            </ul>
+                                        </div>
 
                                     </div>
-                                <div class="dropdown form-group dropdow-start-parent">
-                                        <label for="window_end">End</label>
-                                        <!--<div class="input-group" id="window_start">-->
-                                                <div class="dropdown" id="window_end">
-                                                    <a class="dropdown-toggle" id="dropdown_end" role="button" data-toggle="dropdown" data-target="#" href="#">
-                                                        <input type="text"
-                                                               class="form-control form-control-sm"
-                                                               value="{{ window.end | date: 'yyyy-MM-dd HH:mm:ss'}}">
-                                                    </a>
-                                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                                        <datetimepicker data-ng-model="window.end" data-datetimepicker-config="{minView: 'hour'}"/>
-                                                    </ul>
-                                                </div>
+                                </div>
 
-                                    </div>
+
 
                             </div>
                         </div> 

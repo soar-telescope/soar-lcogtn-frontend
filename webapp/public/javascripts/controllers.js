@@ -104,8 +104,6 @@ app.controller('indexController', function($scope, $http, $window) {
 
     $scope.get_data = function (next) {
         var params = $scope.get_query_string_params(next);
-        console.log(params);
-        console.log($window.localStorage.getItem('lcoToken'));
         $http({
             method: 'GET',
             url: '/api/requestgroups/',
@@ -121,8 +119,6 @@ app.controller('indexController', function($scope, $http, $window) {
                     $scope.current_active = $scope.reqGroups.count;
                 }
             } else {
-                // console.log("error");
-                // console.log(res);
                 $scope.message = res.data.msg;
             }
 

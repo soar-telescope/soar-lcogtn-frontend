@@ -155,7 +155,7 @@ app.controller('indexController', function($scope, $http, $window) {
 });
 
 
-app.controller('addOneController', function($scope, $http, $location) {
+app.controller('addOneController', function($scope, $http, $location, $window) {
     $scope.observation_types = ['NORMAL'];
     $scope.operator_options = ['SINGLE'];
     $scope.gratings = ['SYZY_400'];
@@ -168,19 +168,19 @@ app.controller('addOneController', function($scope, $http, $location) {
     $scope.target_types = ['SIDEREAL', 'NON-SIDEREAL'];
     $scope.rot_modes = ['SKY', 'FLOAT', 'VERTICAL', 'VFLOAT'];
     $scope.target = {
-        'dec': -5.27,
-        'epoch': 2000,
-        'name': 'm43',
-        'proper_motion_dec': 0.0,
-        'proper_motion_ra': 0.0,
-        'ra': 83.879,
+        'dec': null,
+        'epoch': null,
+        'name': null,
+        'proper_motion_dec': null,
+        'proper_motion_ra': null,
+        'ra': null,
         'type': 'SIDEREAL'};
 
     $scope.instrument_configs = [{
         'bin_x': 2,
         'bin_y': 2,
         'exposure_count': 1,
-        'exposure_time': 360,
+        'exposure_time': null,
         'rot_mode' : 'SKY',
         'optical_elements': {
             'grating': 'SYZY_400',
@@ -206,13 +206,9 @@ app.controller('addOneController', function($scope, $http, $location) {
         'target': $scope.target,
         'type': 'SPECTRUM'}];
 
-        $scope.windows = [{
-        'start': null,
-        'end': null}];
-
-    // $scope.windows = [{
-    //     'start': moment.utc().format('YYYY-MM-DD HH:mm:ss'),
-    //     'end': moment.utc().add(1, 'days').format('YYYY-MM-DD HH:mm:ss')}];
+    $scope.windows = [{
+        'start': moment.utc(), //.format('YYYY-MM-DD HH:mm:ss'),
+        'end': moment.utc().add(1, 'days')}]; // .format('YYYY-MM-DD HH:mm:ss')
 
     $scope.requests = [{
         'acceptability_threshold': 90,
@@ -225,7 +221,7 @@ app.controller('addOneController', function($scope, $http, $location) {
         'name': 'test',
         'observation_type': 'NORMAL',
         'operator': 'SINGLE',
-        'proposal': 'NOAO2019B-9990'};
+        'proposal': null};
 
     create_request_group = function() {
         $scope.request_group = Object.assign(
@@ -266,55 +262,18 @@ app.controller('addOneController', function($scope, $http, $location) {
         $scope.configurations.splice(index, 1);
     };
 
-    $scope.on_start_time_set = function(new_date, old_date, index) {
-        $scope.windows[index].start = moment.utc(new_date);
-        console.log($scope.windows[index].start);
-        $scope.$broadcast('start-time-changed');
-    };
-
-    $scope.on_end_time_set = function(new_date, old_date, index) {
-        $scope.windows[index].end = moment.utc(new_date); //.format('YYYY-MM-DD HH:mm:ss');
-        $scope.$broadcast('end-time-changed');
-    };
-
     $scope.add_one_window = function() {
+        console.log('Calling add one window');
         var new_window = angular.copy($scope.windows.slice().reverse()[0]);
         $scope.windows.push(new_window);
-    };
 
-    $scope.startDateBeforeRender = function($view, $dates, index) {
-        console.log($view);
-
-            var activeDate = moment().subtract(1, $view);
-
-            console.log($dates);
-            $dates.filter(function (date) {
-                console.log(moment.utc(date.utcDateValue).format('YYYY-MM-DD HH:mm:ss'));
-                console.log(activeDate.format('YYYY-MM-DD HH:mm:ss'));
-                console.log(date.utcDateValue <= activeDate.valueOf());
-                return date.utcDateValue <= activeDate.valueOf()
-            }).forEach(function (date) {
-                date.selectable = false;
-            })
-    };
-
-    $scope.endDateBeforeRender = function($view, $dates, $leftDate, $upDate, $rightDate, index) {
-        console.log($view);
-        if ($scope.windows[index].start) {
-            var activeDate = moment.utc($scope.windows[index].start).subtract(1, $view).add(1, 'minute');
-        } else {
-            var activeDate = moment.utc().subtract(1, $view).add(1, 'minute');
-        }
-        $dates.filter(function (date) {
-            return moment.utc(date.utcDateValue) < activeDate.valueOf()
-        }).forEach(function (date) {
-            date.selectable = false;
-        });
-        
+        var new_popup = angular.copy($scope.popups.slice().reverse()[0]);
+        $scope.popups.push(new_popup);
     };
 
     $scope.remove_window = function(index) {
         $scope.windows.splice(index, 1);
+        $scope.popups.splice(index, 1);
     };
 
     $scope.cancel = function() {
@@ -323,6 +282,7 @@ app.controller('addOneController', function($scope, $http, $location) {
 
     // simbad query
     $scope.simbad_query = function(){
+        console.log($scope.target.name);
         var query_params = {'id': $scope.target.name};
 
         $http({
@@ -347,13 +307,26 @@ app.controller('addOneController', function($scope, $http, $location) {
     };
 
     // date picker
-    $scope.date_picker_popup = {
-        opened: false
+
+
+    $scope.altInputFormats = ['M!/d!/yyyy'];
+
+    $scope.format = 'yyyy-MM-dd HH:mm:ss';
+
+    $scope.popups = [{'start': false, 'end': false}];
+
+
+    $scope.open_date_picker_start = function (index) {
+        $scope.popups[index].start = true;
     };
 
-    $scope.open_date_picker = function () {
-        $scope.date_picker_popup.opened = true;
-    }
+    $scope.open_date_picker_end = function (index) {
+        $scope.popups[index].end = true;
+    };
+
+    $scope.verify = function() {
+        console.log($scope.windows);
+    };
 
 
 

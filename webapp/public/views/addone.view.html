@@ -1,5 +1,5 @@
 <div class="container">
-    <form>
+    <form class="form" name="addOneForm">
         <div class="card">
             <div class="card-header">
                 <h5> Add a new request </h5>
@@ -7,12 +7,16 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-3 col-md-4">
+
                         <h3>General</h3>
                         <div class="card mb-2">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="rg_ipp">IPP</label>
-                                    <input type="text"
+                                    <input type="number"
+                                           min="0.5"
+                                           max="2"
+                                           step="0.01"
                                            class="form-control form-control-sm"
                                            id="rg_ipp"
                                            ng-model="request_group_general.ipp_value">
@@ -21,6 +25,7 @@
                                 <div class="form-group">
                                     <label for="rg_name">Name</label>
                                     <input type="text"
+                                           placeholder="Name of request"
                                            class="form-control form-control-sm"
                                            id="rg_name"
                                            ng-model="request_group_general.name">
@@ -28,8 +33,11 @@
                                 <div class="form-group">
                                     <label for="rg_proposal">Proposal</label>
                                     <input type="text"
+                                           autocomplete="on"
+                                           placeholder="Proposal ID"
                                            class="form-control form-control-sm"
                                            id="rg_proposal"
+                                           ng-required="true"
                                            ng-model="request_group_general.proposal">
                                 </div>
                                 <div class="form-group">
@@ -60,34 +68,50 @@
                                 <div class="form-group">
                                     <label for="target_name">Name</label>
                                     <input type="text"
+                                           placeholder="Enter target name"
                                            class="form-control form-control-sm"
                                            id="target_name"
+                                           ng-required="true"
                                            ng-change="simbad_query()"
+                                           ng-model-options="{debounce: 500}"
                                            ng-model="target.name">
 
                                 </div>
                                 <div class="form-group">
                                     <label for="target_ra">RA</label>
-                                    <input type="text"
+                                    <input type="number"
+                                           min="0"
+                                           max="360"
+                                           step="any"
+                                           placeholder="Right Ascension"
                                            class="form-control form-control-sm"
                                            id="target_ra"
+                                           ng-required="true"
                                            ng-model="target.ra">
                                 </div>
                                 <div class="form-group">
                                     <label for="target_dec">DEC</label>
-                                    <input type="text"
+                                    <input type="number"
+                                           min="-90"
+                                           max="90"
+                                           step="any"
+                                           placeholder="Declination"
                                            class="form-control form-control-sm"
                                            id="target_dec"
+                                           ng-required="true"
                                            ng-model="target.dec">
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="target_proper_motion_ra"
-                                                   title="Proper Motion Right Ascencion">PM RA</label>
-                                            <input type="text"
+                                                   title="Proper Motion Right Ascension">PM RA</label>
+                                            <input type="number"
+                                                   step="any"
+                                                   placeholder="Proper Motion"
                                                    class="form-control form-control-sm"
                                                    id="target_proper_motion_ra"
+                                                   ng-required="true"
                                                    ng-model="target.proper_motion_ra">
                                         </div>
                                     </div>
@@ -95,9 +119,12 @@
                                         <div class="form-group">
                                             <label for="target_proper_motion_dec"
                                                    title="Proper Motion Declination">PM DEC</label>
-                                            <input type="text"
+                                            <input type="number"
+                                                   step="any"
+                                                   placeholder="Proper Motion"
                                                    class="form-control form-control-sm"
                                                    id="target_proper_motion_dec"
+                                                   ng-required="true"
                                                    ng-model="target.proper_motion_dec">
                                         </div>
                                     </div>
@@ -108,8 +135,10 @@
                                         <div class="form-group">
                                             <label for="target_epoch">Epoch</label>
                                             <input type="text"
+                                                   placeholder="Epoch"
                                                    class="form-control form-control-sm"
                                                    id="target_epoch"
+                                                   ng-required="true"
                                                    ng-model="target.epoch">
                                         </div>
                                     </div>
@@ -151,18 +180,23 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="inst_conf_exposure_time">Exposure Time</label>
-                                                <input type="text"
+                                                <input type="number"
+                                                       min="0"
+                                                       placeholder="Seconds"
                                                        class="form-control form-control-sm"
                                                        id="inst_conf_exposure_time"
+                                                       ng-required="true"
                                                        ng-model="inst_conf.exposure_time">
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="inst_conf_exposure_count">Exposure Count</label>
-                                                <input type="text"
+                                                <input type="number"
+                                                       min="1"
                                                        class="form-control form-control-sm"
                                                        id="inst_conf_exposure_count"
+                                                       ng-required="true"
                                                        ng-model="inst_conf.exposure_count">
                                             </div>
                                         </div>
@@ -230,6 +264,7 @@
                     <div class="col-sm-3 col-md-4">
                         <h3>Time Windows
                             <button class="btn btn-outline-primary"
+                                    type="button"
                                     ng-click="add_one_window()">+1</button>
                         </h3>
                     </div>
@@ -245,72 +280,61 @@
                                              ng-if="windows.length > 1">x</button>
                                 </div>
 
-
                                 <div class="form-group">
-                                    <div class="dropdown">
-                                        <label for="{{ 'window_start_' + $index}}">Start</label>
-                                        <div class="dropdown" id="window_start">
-                                            <a class="dropdown-toggle"
-                                               id="{{ 'window_start_' + $index}}"
-                                               role="button"
-                                               data-toggle="dropdown"
-                                               data-target="#"
-                                               href="#">
-                                                <input type="text"
-                                                       class="form-control form-control-sm"
-                                                       value="{{ window.start }}">
-                                            </a>
-                                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                                <datetimepicker
-                                                        data-ng-model="window.start"
-                                                        data-on-set-time="on_start_time_set(newDate, oldDate, $index)"
-                                                        data-datetimepicker-config="{
-                                                          dropdownSelector: '#window_start_' + $index,
-                                                          renderOn: 'start-date-changed',
-                                                          minView: 'hour'}"
-                                                        data-before-render="startDateBeforeRender($view, $dates, $index)">
-
-                                                </datetimepicker>
-                                            </ul>
-                                        </div>
+                                    <label for="{{ 'window_start_' + $index}}">Start</label>
+                                    <div class="input-group" id="{{ 'window_start_' + $index}}">
+                                    
+                                        <input type="text"
+                                               placeholder="Select start date"
+                                               class="form-control form-control-sm"
+                                               uib-datepicker-popup="{{format}}"
+                                               ng-model="window.start"
+                                               is-open="popups[$index].start",
+                                               date-picker-options="date_options"
+                                               ng-required="true"
+                                               close-text="Close"
+                                               alt-input-formats="altInputFormats">
+                                        <span class="input-group-btn">
+                                            <button type="button"
+                                                    class="btn btn-secondary"
+                                                    ng-click="open_date_picker_start($index)">
+                                                <i class="fa-svg-icon">
+                                                    <svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M192 1664h288v-288h-288v288zm352 0h320v-288h-320v288zm-352-352h288v-320h-288v320zm352 0h320v-320h-320v320zm-352-384h288v-288h-288v288zm736 736h320v-288h-320v288zm-384-736h320v-288h-320v288zm768 736h288v-288h-288v288zm-384-352h320v-320h-320v320zm-352-864v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm736 864h288v-320h-288v320zm-384-384h320v-288h-320v288zm384 0h288v-288h-288v288zm32-480v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm384-64v1280q0 52-38 90t-90 38h-1408q-52 0-90-38t-38-90v-1280q0-52 38-90t90-38h128v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h384v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h128q52 0 90 38t38 90z"/></svg>
+                                                </i>
+                                            </button>
+                                        </span>
+                                    
                                     </div>
                                 </div>
+
                                 <div class="form-group">
-                                    <div class="dropdown">
-                                        <div class="dropdown" id="window_end">
-                                            <label for="{{ 'window_end_' + $index}}">End</label>
-                                            <a class="dropdown-toggle"
-                                               id="{{ 'window_end_' + $index}}"
-                                               role="button"
-                                               data-toggle="dropdown"
-                                               data-target="#"
-                                               href="#">
-                                                <div class="input-group">
-                                                    <input type="text"
-                                                           class="form-control form-control-sm"
-                                                           value="{{ window.end }}">
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </span>
-                                                </div>
+                                    <label for="{{ 'window_end_' + $index}}">End</label>
+                                    <div class="input-group" id="{{ 'window_end_' + $index}}">
 
-                                            </a>
-                                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                                <datetimepicker
-                                                        data-ng-model="window.end"
-                                                        data-on-set-time="on_end_time_set(newDate, oldDate, $index)"
-                                                        data-datetimepicker-config="{
-                                                          dropdownSelector: '#window_end_' + $index,
-                                                          renderOn: 'end-date-changed',
-                                                          minView: 'hour'}"
-                                                        data-before-render="endDateBeforeRender($view, $dates, $leftDate, $upDate, $rightDate, $index)">
-                                                    
-                                                </datetimepicker>
-                                            </ul>
-                                        </div>
-
+                                        <input type="text"
+                                               placeholder="Select end date"
+                                               class="form-control form-control-sm"
+                                               uib-datepicker-popup="{{format}}"
+                                               ng-model="window.end"
+                                               is-open="popups[$index].end",
+                                               date-picker-options="date_options"
+                                               ng-required="true"
+                                               close-text="Close"
+                                               alt-input-formats="altInputFormats">
+                                        <span class="input-group-btn">
+                                            <button type="button"
+                                                    class="btn btn-secondary"
+                                                    ng-click="open_date_picker_end($index)">
+                                                <i class="fa-svg-icon">
+                                                    <svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M192 1664h288v-288h-288v288zm352 0h320v-288h-320v288zm-352-352h288v-320h-288v320zm352 0h320v-320h-320v320zm-352-384h288v-288h-288v288zm736 736h320v-288h-320v288zm-384-736h320v-288h-320v288zm768 736h288v-288h-288v288zm-384-352h320v-320h-320v320zm-352-864v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm736 864h288v-320h-288v320zm-384-384h320v-288h-320v288zm384 0h288v-288h-288v288zm32-480v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm384-64v1280q0 52-38 90t-90 38h-1408q-52 0-90-38t-38-90v-1280q0-52 38-90t90-38h128v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h384v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h128q52 0 90 38t38 90z"/></svg>
+                                                </i>
+                                            </button>
+                                        </span>
                                     </div>
                                 </div>
+
+
+
 
 
 
@@ -323,6 +347,7 @@
                     <div class="col col-sm-3 col-md-4">
                         <h3>Configurations
                                 <button class="btn btn-outline-primary"
+                                        type="button"
                                         ng-click="add_one_configuration()">+1</button>
                         </h3>
                     </div>
@@ -376,7 +401,10 @@
                                      </div>
                                     <div class="form-group">
                                         <label for="configuration_constraints_max_airmass">Maximum Airmass</label>
-                                        <input type="text"
+                                        <input type="number"
+                                               min="1"
+                                               step="0.1"
+                                               max="3"
                                                class="form-control form-control-sm"
                                                id="configuration_constraints_max_airmass"
                                                ng-model="conf.constraints.max_airmass">
@@ -392,15 +420,13 @@
                             </div>
 
                         </div>
-
-
-                 
                 </div>
-
             </div>
+
             <div class="card-footer">
-                <button class="btn btn-primary m-1" ng-click="post_data()" style="float: right">Submit</button>
+                <button class="btn btn-primary m-1" ng-click="post_data()" ng-disabled="!addOneForm.$valid" style="float: right">Submit</button>
                 <button class="btn btn-danger m-1" ng-click="cancel()" style="float: right">Cancel</button>
+                <button class="btn btn-info m-1" ng-click="verify()" style="float: right">Verify</button>
             </div>
         </div>
     </form>

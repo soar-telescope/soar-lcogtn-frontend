@@ -206,13 +206,13 @@ app.controller('addOneController', function($scope, $http, $location) {
         'target': $scope.target,
         'type': 'SPECTRUM'}];
 
+        $scope.windows = [{
+        'start': null,
+        'end': null}];
 
-
-
-
-    $scope.windows = [{
-        'start': '2019-03-20 22:50:42',
-        'end': '2019-03-25 23:58:42'}];
+    // $scope.windows = [{
+    //     'start': moment.utc().format('YYYY-MM-DD HH:mm:ss'),
+    //     'end': moment.utc().add(1, 'days').format('YYYY-MM-DD HH:mm:ss')}];
 
     $scope.requests = [{
         'acceptability_threshold': 90,
@@ -266,9 +266,51 @@ app.controller('addOneController', function($scope, $http, $location) {
         $scope.configurations.splice(index, 1);
     };
 
+    $scope.on_start_time_set = function(new_date, old_date, index) {
+        $scope.windows[index].start = moment.utc(new_date);
+        console.log($scope.windows[index].start);
+        $scope.$broadcast('start-time-changed');
+    };
+
+    $scope.on_end_time_set = function(new_date, old_date, index) {
+        $scope.windows[index].end = moment.utc(new_date); //.format('YYYY-MM-DD HH:mm:ss');
+        $scope.$broadcast('end-time-changed');
+    };
+
     $scope.add_one_window = function() {
         var new_window = angular.copy($scope.windows.slice().reverse()[0]);
         $scope.windows.push(new_window);
+    };
+
+    $scope.startDateBeforeRender = function($view, $dates, index) {
+        console.log($view);
+
+            var activeDate = moment().subtract(1, $view);
+
+            console.log($dates);
+            $dates.filter(function (date) {
+                console.log(moment.utc(date.utcDateValue).format('YYYY-MM-DD HH:mm:ss'));
+                console.log(activeDate.format('YYYY-MM-DD HH:mm:ss'));
+                console.log(date.utcDateValue <= activeDate.valueOf());
+                return date.utcDateValue <= activeDate.valueOf()
+            }).forEach(function (date) {
+                date.selectable = false;
+            })
+    };
+
+    $scope.endDateBeforeRender = function($view, $dates, $leftDate, $upDate, $rightDate, index) {
+        console.log($view);
+        if ($scope.windows[index].start) {
+            var activeDate = moment.utc($scope.windows[index].start).subtract(1, $view).add(1, 'minute');
+        } else {
+            var activeDate = moment.utc().subtract(1, $view).add(1, 'minute');
+        }
+        $dates.filter(function (date) {
+            return moment.utc(date.utcDateValue) < activeDate.valueOf()
+        }).forEach(function (date) {
+            date.selectable = false;
+        });
+        
     };
 
     $scope.remove_window = function(index) {

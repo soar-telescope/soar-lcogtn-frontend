@@ -231,7 +231,6 @@
                         <h3>Time Windows
                             <button class="btn btn-outline-primary"
                                     ng-click="add_one_window()">+1</button>
-
                         </h3>
                     </div>
                 </div>
@@ -249,20 +248,29 @@
 
                                 <div class="form-group">
                                     <div class="dropdown">
-                                        <label for="window_start">Start</label>
+                                        <label for="{{ 'window_start_' + $index}}">Start</label>
                                         <div class="dropdown" id="window_start">
                                             <a class="dropdown-toggle"
-                                               id="dropdown_start"
+                                               id="{{ 'window_start_' + $index}}"
                                                role="button"
                                                data-toggle="dropdown"
                                                data-target="#"
                                                href="#">
                                                 <input type="text"
                                                        class="form-control form-control-sm"
-                                                       value="{{ window.start | date: 'yyyy-MM-dd HH:mm:ss'}}">
+                                                       value="{{ window.start }}">
                                             </a>
                                             <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                                <datetimepicker data-ng-model="window.start" data-datetimepicker-config="{minView: 'hour'}"/>
+                                                <datetimepicker
+                                                        data-ng-model="window.start"
+                                                        data-on-set-time="on_start_time_set(newDate, oldDate, $index)"
+                                                        data-datetimepicker-config="{
+                                                          dropdownSelector: '#window_start_' + $index,
+                                                          renderOn: 'start-date-changed',
+                                                          minView: 'hour'}"
+                                                        data-before-render="startDateBeforeRender($view, $dates, $index)">
+
+                                                </datetimepicker>
                                             </ul>
                                         </div>
                                     </div>
@@ -270,19 +278,34 @@
                                 <div class="form-group">
                                     <div class="dropdown">
                                         <div class="dropdown" id="window_end">
-                                            <label for="window_end">End</label>
+                                            <label for="{{ 'window_end_' + $index}}">End</label>
                                             <a class="dropdown-toggle"
-                                               id="dropdown_end"
+                                               id="{{ 'window_end_' + $index}}"
                                                role="button"
                                                data-toggle="dropdown"
                                                data-target="#"
                                                href="#">
-                                                <input type="text"
-                                                       class="form-control form-control-sm"
-                                                       value="{{ window.end | date: 'yyyy-MM-dd HH:mm:ss'}}">
+                                                <div class="input-group">
+                                                    <input type="text"
+                                                           class="form-control form-control-sm"
+                                                           value="{{ window.end }}">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+
                                             </a>
                                             <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                                <datetimepicker data-ng-model="window.end" data-datetimepicker-config="{minView: 'hour'}"/>
+                                                <datetimepicker
+                                                        data-ng-model="window.end"
+                                                        data-on-set-time="on_end_time_set(newDate, oldDate, $index)"
+                                                        data-datetimepicker-config="{
+                                                          dropdownSelector: '#window_end_' + $index,
+                                                          renderOn: 'end-date-changed',
+                                                          minView: 'hour'}"
+                                                        data-before-render="endDateBeforeRender($view, $dates, $leftDate, $upDate, $rightDate, $index)">
+                                                    
+                                                </datetimepicker>
                                             </ul>
                                         </div>
 

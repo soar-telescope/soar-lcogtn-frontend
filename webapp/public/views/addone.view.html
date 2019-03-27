@@ -161,103 +161,83 @@
                         <h3>Instrument Configurations</h3>
                         <div class="card mb-2">
                             <div class="card-body">
-                                <div ng-repeat="inst_conf in instrument_configs">
-                                    <div class="form-group">
-                                        <label for="inst_conf_opt_elem_grating">Grating</label>
-                                        <select class="form-control form-control-sm" id="inst_conf_opt_elem_grating"
-                                                ng-options="grating for grating in gratings"
-                                                ng-model="inst_conf.optical_elements.grating">
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inst_conf_opt_elem_slit">Slit</label>
-                                        <select class="form-control form-control-sm" id="inst_conf_opt_elem_slit"
-                                                ng-options="slit for slit in slits"
-                                                ng-model="inst_conf.optical_elements.slit">
-                                        </select>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="inst_conf_exposure_time">Exposure Time</label>
-                                                <input type="number"
-                                                       min="0"
-                                                       placeholder="Seconds"
-                                                       class="form-control form-control-sm"
-                                                       id="inst_conf_exposure_time"
-                                                       ng-required="true"
-                                                       ng-model="inst_conf.exposure_time">
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="inst_conf_exposure_count">Exposure Count</label>
-                                                <input type="number"
-                                                       min="1"
-                                                       class="form-control form-control-sm"
-                                                       id="inst_conf_exposure_count"
-                                                       ng-required="true"
-                                                       ng-model="inst_conf.exposure_count">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="inst_conf_rot_mode">Rotation Mode</label>
-                                                <select class="form-control form-control-sm"
-                                                        id="inst_conf_rot_mode"
-                                                        ng-options="rot_mode for rot_mode in rot_modes"
-                                                        ng-model="inst_conf.rot_mode">
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="inst_conf_extra_par_rot_angle">Rotation Angle</label>
-                                                <input type="text"
-                                                       class="form-control form-control-sm"
-                                                       id="inst_conf_extra_par_rot_angle"
-                                                       ng-model="inst_conf.extra_params.rot_angle">
-                                            </div>
+                                <div class="form-group">
+                                    <label for="configuration_instrument_type">Instrument Type</label>
+                                    <select class="form-control form-control-sm"
+                                            id="configuration_instrument_type"
+                                            ng-disabled="true"
+                                            ng-options="instrument for instrument in instrument_type"
+                                            ng-model="configurations[0].instrument_type">
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inst_conf_opt_elem_grating">Grating</label>
+                                    <select class="form-control form-control-sm" id="inst_conf_opt_elem_grating"
+                                            ng-disabled="disable_inst_conf()"
+                                            ng-options="grating for grating in gratings"
+                                            ng-model="instrument_configs[0].optical_elements.grating">
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inst_conf_opt_elem_slit">Slit</label>
+                                    <select class="form-control form-control-sm"
+                                            id="inst_conf_opt_elem_slit"
+                                            ng-disabled="disable_inst_conf()"
+                                            ng-options="slit for slit in slits"
+                                            ng-model="instrument_configs[0].optical_elements.slit">
+                                    </select>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="inst_conf_rot_mode">Rotation Mode</label>
+                                            <select class="form-control form-control-sm"
+                                                    id="inst_conf_rot_mode"
+                                                    ng-disabled="disable_inst_conf()"
+                                                    ng-options="rot_mode for rot_mode in rot_modes"
+                                                    ng-model="instrument_configs[0].rot_mode">
+                                            </select>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="inst_conf_bin_x">Binning X</label>
-                                                <select class="form-control form-control-sm"
-                                                        id="inst_conf_bin_x"
-                                                        ng-options="binning for binning in [1, 2, 3]"
-                                                        ng-model="inst_conf.bin_x">
-                                                </select>
-                                                <!--<input type="text"-->
-                                                       <!--class="form-control form-control-sm"-->
-                                                       <!--id="inst_conf_bin_x"-->
-                                                       <!--ng-model="inst_conf.bin_x">-->
-                                            </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="inst_conf_extra_par_rot_angle">Rotation Angle</label>
+                                            <input type="text"
+                                                   class="form-control form-control-sm"
+                                                   id="inst_conf_extra_par_rot_angle"
+                                                   ng-disabled="disable_inst_conf()"
+                                                   ng-model="instrument_configs[0].extra_params.rot_angle">
                                         </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="inst_conf_bin_y">Binning Y</label>
-                                                <select class="form-control form-control-sm"
-                                                        id="inst_conf_bin_y"
-                                                        ng-options="binning for binning in [1, 2, 3]"
-                                                        ng-model="inst_conf.bin_y">
-                                                </select>
-                                                <!--<input type="text"-->
-                                                       <!--class="form-control form-control-sm"-->
-                                                       <!--id="inst_conf_bin_y"-->
-                                                       <!--ng-model="inst_conf.bin_y">-->
-                                            </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="inst_conf_bin_x">Binning X</label>
+                                            <select class="form-control form-control-sm"
+                                                    id="inst_conf_bin_x"
+                                                    ng-disabled="true"
+                                                    ng-options="binning for binning in [1, 2, 3]"
+                                                    ng-model="instrument_configs[0].bin_x">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="inst_conf_bin_y">Binning Y</label>
+                                            <select class="form-control form-control-sm"
+                                                    id="inst_conf_bin_y"
+                                                    ng-disabled="true"
+                                                    ng-options="binning for binning in [1, 2, 3]"
+                                                    ng-model="instrument_configs[0].bin_y">
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
                 <hr>
                 <div class="row">
@@ -290,7 +270,7 @@
                                                uib-datepicker-popup="{{format}}"
                                                ng-model="window.start"
                                                is-open="popups[$index].start",
-                                               date-picker-options="date_options"
+                                               datepicker-options="date_options"
                                                ng-required="true"
                                                close-text="Close"
                                                alt-input-formats="altInputFormats">
@@ -317,7 +297,7 @@
                                                uib-datepicker-popup="{{format}}"
                                                ng-model="window.end"
                                                is-open="popups[$index].end",
-                                               date-picker-options="date_options"
+                                               datepicker-options="date_options"
                                                ng-required="true"
                                                close-text="Close"
                                                alt-input-formats="altInputFormats">
@@ -367,18 +347,7 @@
                                                 ng-model="conf.type">
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="configuration_instrument_type">Instrument Type</label>
-                                        <select class="form-control form-control-sm"
-                                                id="configuration_instrument_type"
-                                                ng-options="instrument for instrument in instrument_type"
-                                                ng-model="conf.instrument_type">
-                                        </select>
-                                        <!--<input type="text"-->
-                                               <!--class="form-control form-control-sm"-->
-                                               <!--id="configuration_instrument_type"-->
-                                               <!--ng-model="conf.instrument_type">-->
-                                    </div>
+
                                     <div class="form-group">
                                         <label for="configuration_guiding_config">Guiding Configuration</label>
                                         <select class="form-control form-control-sm"
@@ -386,10 +355,6 @@
                                                 ng-options="guiding_config for guiding_config in guiding_configs"
                                                 ng-model="conf.guiding_config.state">
                                         </select>
-                                        <!--<input type="text"-->
-                                               <!--class="form-control form-control-sm"-->
-                                               <!--id="configuration_guiding_config"-->
-                                               <!--ng-model="conf.guiding_config.state">-->
                                     </div>
                                     <div class="form-group">
                                         <label for="configuration_acquisition_config_mode">Aquisition Configuration Mode</label>
@@ -416,6 +381,31 @@
                                                id="configuration_constraints_min_lunar_distance"
                                                ng-model="conf.constraints.min_lunar_distance">
                                     </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="inst_conf_exposure_time">Exposure Time</label>
+                                                <input type="number"
+                                                       min="0"
+                                                       placeholder="Seconds"
+                                                       class="form-control form-control-sm"
+                                                       id="inst_conf_exposure_time"
+                                                       ng-required="true"
+                                                       ng-model="instrument_configs[$index].exposure_time">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="inst_conf_exposure_count">Exposure Count</label>
+                                                <input type="number"
+                                                       min="1"
+                                                       class="form-control form-control-sm"
+                                                       id="inst_conf_exposure_count"
+                                                       ng-required="true"
+                                                       ng-model="instrument_configs[$index].exposure_count">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -426,7 +416,6 @@
             <div class="card-footer">
                 <button class="btn btn-primary m-1" ng-click="post_data()" ng-disabled="!addOneForm.$valid" style="float: right">Submit</button>
                 <button class="btn btn-danger m-1" ng-click="cancel()" style="float: right">Cancel</button>
-                <button class="btn btn-info m-1" ng-click="verify()" style="float: right">Verify</button>
             </div>
         </div>
     </form>

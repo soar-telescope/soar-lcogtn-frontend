@@ -156,15 +156,32 @@ app.controller('indexController', function($scope, $http, $window) {
 
 
 app.controller('addOneController', function($scope, $http, $location, $window) {
-    $scope.observation_types = ['NORMAL'];
-    $scope.operator_options = ['SINGLE'];
+    $scope.observation_types = ['NORMAL', 'RAPID_RESPONSE'];
+    $scope.operator_options = ['SINGLE', 'MANY'];
     $scope.gratings = ['SYZY_400'];
     $scope.slits = ['slit_1.0as'];
     $scope.rot_modes = ['SKY'];
     $scope.instrument_type = ['SOAR_GHTS_REDCAM'];
-    $scope.guiding_configs = ['OPTIONAL'];
+    $scope.guiding_configs = ['OPTIONAL', 'ON', 'OFF'];
     $scope.acquisition_config_modes = ['MANUAL'];
-    $scope.configuration_types = ['SPECTRUM', 'ARC', 'LAMP_FLAT'];
+    $scope.configuration_types = [
+        'SPECTRUM',
+        'ARC',
+        'LAMP_FLAT'
+        ,'EXPOSE',
+        'SKY_FLAT',
+        'STANDARD',
+        'ARC',
+        'LAMP_FLAT',
+        'SPECTRUM',
+        'AUTO_FOCUS',
+        'TRIPLE',
+        'NRES_TEST',
+        'NRES_SPECTRUM',
+        'NRES_EXPOSE',
+        'NRES_BIAS',
+        'NRES_DARK',
+        'ENGINEERING'];
     $scope.target_types = ['SIDEREAL', 'NON-SIDEREAL'];
     $scope.rot_modes = ['SKY', 'FLOAT', 'VERTICAL', 'VFLOAT'];
     $scope.target = {
@@ -218,7 +235,7 @@ app.controller('addOneController', function($scope, $http, $location, $window) {
 
     $scope.request_group_general = {
         'ipp_value': 1.05,
-        'name': 'test',
+        'name': null,
         'observation_type': 'NORMAL',
         'operator': 'SINGLE',
         'proposal': null};
@@ -256,10 +273,14 @@ app.controller('addOneController', function($scope, $http, $location, $window) {
     $scope.add_one_configuration = function() {
         var new_conf = angular.copy($scope.configurations.slice().reverse()[0]);
         $scope.configurations.push(new_conf);
+
+        var new_inst_conf = angular.copy($scope.instrument_configs.slice().reverse()[0]);
+        $scope.instrument_configs.push(new_inst_conf);
     };
 
     $scope.remove_configuration = function(index) {
         $scope.configurations.splice(index, 1);
+        $scope.instrument_configs.splice(index, 1);
     };
 
     $scope.add_one_window = function() {
@@ -274,6 +295,14 @@ app.controller('addOneController', function($scope, $http, $location, $window) {
     $scope.remove_window = function(index) {
         $scope.windows.splice(index, 1);
         $scope.popups.splice(index, 1);
+    };
+
+    $scope.disable_inst_conf = function () {
+        if ($scope.configurations.length > 1) {
+            return true
+        } else {
+            return false
+        }
     };
 
     $scope.cancel = function() {
@@ -308,6 +337,9 @@ app.controller('addOneController', function($scope, $http, $location, $window) {
 
     // date picker
 
+    $scope.date_options = {
+        minDate: new Date()
+    };
 
     $scope.altInputFormats = ['M!/d!/yyyy'];
 
@@ -322,10 +354,6 @@ app.controller('addOneController', function($scope, $http, $location, $window) {
 
     $scope.open_date_picker_end = function (index) {
         $scope.popups[index].end = true;
-    };
-
-    $scope.verify = function() {
-        console.log($scope.windows);
     };
 
 

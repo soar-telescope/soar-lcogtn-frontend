@@ -37,49 +37,156 @@
                                  <div class="card">
                                      <div class="card-body">
                                          <div class="row" ng-repeat="reqs in res.requests">
-                                             <div class="col-sm-4 col-md-7 col-lg-3 mb-1">
+                                             <div class="col-sm-4 col-md-7 col-lg-3 mb-1" ng-repeat="confs in res.requests[0].configurations">
                                                  <div class="card">
                                                      <div class="card-header">
-                                                         <h3>Request Group</h3>
+                                                         <h3>Target: {{$index + 1}}</h3>
                                                      </div>
                                                      <div class="card-body">
                                                          <ul>
-                                                             <li>Submitter: {{res.submitter}}</li>
-                                                             <li>Proposal: {{res.proposal}}</li>
-                                                             <li>Name: {{res.name}}</li>
-                                                             <li>Observation Type: {{res.observation_type}}</li>
-                                                             <li>Operator: {{res.operator}}</li>
-                                                             <li>IPP Value: {{res.ipp_value}}</li>
-                                                                 <!--<tr><td>State</td>             <td>{{res.state}}</td>                               </tr>-->
-                                                             <li>Telescope Class: {{reqs.location.telescope_class}}</li>
-                                                             <li>Window</li>
+                                                             <li>Type: {{confs.target.type}}</li>
+                                                             <li>Name: {{confs.target.name}}</li>
+                                                             <li>RA: {{confs.target.ra | rafmt}}</li>
+                                                             <li>DEC: {{confs.target.dec | decfmt }}</li>
+                                                             <li>Proper Motion RA: {{confs.target.proper_motion_ra}}</li>
+                                                             <li>Proper Motion DEC: {{confs.target.proper_motion_dec}}</li>
+                                                             <li>Parallax: {{confs.target.parallax}}</li>
+                                                             <li>Coordinate System: {{confs.target.coordinate_system}}</li>
+                                                             <li>Equinox: {{confs.target.equinox}}</li>
+                                                             <li>Epoch: {{confs.target.epoch}}</li>
+                                                         </ul>
+                                                         <ul>
+                                                             <li>Instrument Type: {{confs.instrument_type}}</li>
+                                                             <li>Type: {{confs.type}}</li>
+                                                             <li>Priority: {{confs.priority}}</li>
+                                                             <li>Instrument Configurations</li>
+                                                                  <ul>
+                                                                      <li ng-repeat-start="instconf in confs.instrument_configs">Mode: {{instconf.mode}}</li>
+                                                                      <li>Slit: {{instconf.optical_elements.slit}}</li>
+                                                                      <li>Grating: {{instconf.optical_elements.grating}}</li>
+                                                                      <li>Exposure Time: {{instconf.exposure_time}} seconds</li>
+                                                                      <li>Exposure Count: {{instconf.exposure_count}}</li>
+                                                                      <li>Bin X: {{instconf.bin_x}}</li>
+                                                                      <li>Bin Y: {{instconf.bin_y}}</li>
+                                                                      <li>Rotation Mode: {{instconf.rot_mode}}</li>
+                                                                      <li ng-repeat-end> Rotation Angle: {{instconf.extra_params.rot_angle}}</li>
+                                                                  </ul>
+                                                             <li>Constraints</li>
                                                                  <ul>
-                                                                     <li ng-repeat-start="windw in reqs.windows">Start: {{windw.start}}</li>
-                                                                     <li ng-repeat-end>End: {{windw.end}}</li>
+                                                                     <li>Maximum Airmass: {{confs.constraints.max_airmass}}</li>
+                                                                     <li>Minimum Lunar Distance: {{confs.constraints.min_lunar_distance}}</li>
+                                                                 </ul>
+                                                             <li>Acquisition</li>
+                                                                 <ul>
+                                                                     <li>Mode: {{confs.acquisition_config.mode}}</li>
+                                                                 </ul>
+                                                             <li>Guiding</li>
+                                                                 <ul>
+                                                                     <li>State: {{confs.guiding_config.state}}</li>
+                                                                     <li>Mode: {{confs.guiding_config.mode}}</li>
+                                                                     <li>Exposure Time: {{confs.guiding_config.exposure_time}}</li>
+                                                                 </ul>
+                                                             <li>Target</li>
+
+
+                                                         </ul>
+                                                         <!--<li>ID: {{confs.id}}</li>-->
+
+                                                         <!--<li>{{instconf.}}</li>-->
+                                                     </div>
+                                                 </div>
+
+
+                                             </div>
+                                             <div class="col-sm-4 col-md-7 col-lg-3 mb-1" ng-repeat="confs in res.requests[0].configurations">
+                                                 <div class="card">
+                                                     <div class="card-header">
+                                                         <h3>Instrument</h3>
+                                                     </div>
+                                                     <div class="card-body">
+                                                         <ul>
+                                                             <li>Instrument Type: {{confs.instrument_type}}</li>
+                                                             <li>Type: {{confs.type}}</li>
+                                                             <li>Priority: {{confs.priority}}</li>
+                                                             <li>Instrument Configurations</li>
+                                                                  <ul>
+                                                                      <li ng-repeat-start="instconf in confs.instrument_configs">Mode: {{instconf.mode}}</li>
+                                                                      <li>Slit: {{instconf.optical_elements.slit}}</li>
+                                                                      <li>Grating: {{instconf.optical_elements.grating}}</li>
+                                                                      <li>Exposure Time: {{instconf.exposure_time}} seconds</li>
+                                                                      <li>Exposure Count: {{instconf.exposure_count}}</li>
+                                                                      <li>Bin X: {{instconf.bin_x}}</li>
+                                                                      <li>Bin Y: {{instconf.bin_y}}</li>
+                                                                      <li>Rotation Mode: {{instconf.rot_mode}}</li>
+                                                                      <li ng-repeat-end> Rotation Angle: {{instconf.extra_params.rot_angle}}</li>
+                                                                  </ul>
+                                                             <li>Constraints</li>
+                                                                 <ul>
+                                                                     <li>Maximum Airmass: {{confs.constraints.max_airmass}}</li>
+                                                                     <li>Minimum Lunar Distance: {{confs.constraints.min_lunar_distance}}</li>
+                                                                 </ul>
+                                                             <li>Acquisition</li>
+                                                                 <ul>
+                                                                     <li>Mode: {{confs.acquisition_config.mode}}</li>
+                                                                 </ul>
+                                                             <li>Guiding</li>
+                                                                 <ul>
+                                                                     <li>State: {{confs.guiding_config.state}}</li>
+                                                                     <li>Mode: {{confs.guiding_config.mode}}</li>
+                                                                     <li>Exposure Time: {{confs.guiding_config.exposure_time}}</li>
                                                                  </ul>
                                                          </ul>
+                                                         <!--<li>ID: {{confs.id}}</li>-->
 
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                             <div class="col-sm-4 col-md-7 col-lg-3 mb-1">
-                                                 <div class="card">
-                                                     <div class="card-header">
-                                                         <h3>Request {{reqs.id}} Summary</h3>
-                                                     </div>
-                                                     <div class="card-body">
-                                                         <!--<li>ID: {{reqs.id}}</li>-->
-                                                         <ul>
-                                                             <li>Observation Note: {{reqs.observation_note}}</li>
-                                                             <li>State: {{reqs.state}}</li>
-                                                             <li>Acceptability Threshold: {{reqs.acceptability_threshold}}</li>
-                                                             <li>Duration: {{reqs.duration}}</li>
-                                                         </ul>
-
+                                                         <!--<li>{{instconf.}}</li>-->
                                                      </div>
                                                  </div>
 
+
                                              </div>
+                                             <!--<div class="col-sm-4 col-md-7 col-lg-3 mb-1">-->
+                                                 <!--<div class="card">-->
+                                                     <!--<div class="card-header">-->
+                                                         <!--<h3>Request Group</h3>-->
+                                                     <!--</div>-->
+                                                     <!--<div class="card-body">-->
+                                                         <!--<ul>-->
+                                                             <!--<li>Submitter: {{res.submitter}}</li>-->
+                                                             <!--<li>Proposal: {{res.proposal}}</li>-->
+                                                             <!--<li>Name: {{res.name}}</li>-->
+                                                             <!--<li>Observation Type: {{res.observation_type}}</li>-->
+                                                             <!--<li>Operator: {{res.operator}}</li>-->
+                                                             <!--<li>IPP Value: {{res.ipp_value}}</li>-->
+                                                                 <!--&lt;!&ndash;<tr><td>State</td>             <td>{{res.state}}</td>                               </tr>&ndash;&gt;-->
+                                                             <!--<li>Telescope Class: {{reqs.location.telescope_class}}</li>-->
+                                                             <!--<li>Window</li>-->
+                                                                 <!--<ul>-->
+                                                                     <!--<li ng-repeat-start="windw in reqs.windows">Start: {{windw.start}}</li>-->
+                                                                     <!--<li ng-repeat-end>End: {{windw.end}}</li>-->
+                                                                 <!--</ul>-->
+                                                         <!--</ul>-->
+
+                                                     <!--</div>-->
+                                                 <!--</div>-->
+                                             <!--</div>-->
+                                             <!--<div class="col-sm-4 col-md-7 col-lg-3 mb-1">-->
+                                                 <!--<div class="card">-->
+                                                     <!--<div class="card-header">-->
+                                                         <!--<h3>Request {{reqs.id}} Summary</h3>-->
+                                                     <!--</div>-->
+                                                     <!--<div class="card-body">-->
+                                                         <!--&lt;!&ndash;<li>ID: {{reqs.id}}</li>&ndash;&gt;-->
+                                                         <!--<ul>-->
+                                                             <!--<li>Observation Note: {{reqs.observation_note}}</li>-->
+                                                             <!--<li>State: {{reqs.state}}</li>-->
+                                                             <!--<li>Acceptability Threshold: {{reqs.acceptability_threshold}}</li>-->
+                                                             <!--<li>Duration: {{reqs.duration}}</li>-->
+                                                         <!--</ul>-->
+
+                                                     <!--</div>-->
+                                                 <!--</div>-->
+
+                                             <!--</div>-->
                                              <!--{{res}}-->
                                              <div class="col-sm-4 col-md-7 col-lg-3 mb-1" ng-repeat="confs in res.requests[0].configurations">
                                                  <div class="card">

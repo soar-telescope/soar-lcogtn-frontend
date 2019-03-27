@@ -23,7 +23,7 @@
             <div class="card-body">
                 <div class="list-group" ng-repeat="res in reqGroups.results">
                     <a href="#"
-                       class="list-group-item list-group-item-action list-group-item-dark mb-xs-0 mb-md-1"
+                       class="list-group-item list-group-item-action list-group-item-dark"
                        ng-class="{active: is_active(res.id)}"
                        ng-click="change_active(res.id)">
                         <h5> ID: {{res.id}} Submitted by: {{res.submitter}} State: <span ng-class="{'text-danger': res.state == 'CANCELED', 'text-info': res.state == 'PENDING'}" >{{res.state}}</span></h5>
@@ -37,7 +37,7 @@
                                  <div class="card">
                                      <div class="card-body">
                                          <div class="row" ng-repeat="reqs in res.requests">
-                                             <div class="col-sm-4 col-md-7 col-lg-3">
+                                             <div class="col-sm-4 col-md-7 col-lg-3 mb-1">
                                                  <div class="card">
                                                      <div class="card-header">
                                                          <h3>Request Group</h3>
@@ -62,7 +62,7 @@
                                                      </div>
                                                  </div>
                                              </div>
-                                             <div class="col-sm-4 col-md-7 col-lg-3">
+                                             <div class="col-sm-4 col-md-7 col-lg-3 mb-1">
                                                  <div class="card">
                                                      <div class="card-header">
                                                          <h3>Request {{reqs.id}} Summary</h3>
@@ -81,7 +81,7 @@
 
                                              </div>
                                              <!--{{res}}-->
-                                             <div class="col-sm-4 col-md-7 col-lg-3" ng-repeat="confs in res.requests[0].configurations">
+                                             <div class="col-sm-4 col-md-7 col-lg-3 mb-1" ng-repeat="confs in res.requests[0].configurations">
                                                  <div class="card">
                                                      <div class="card-header">
                                                          <h3>Configuration ID: {{confs.id}}</h3>
@@ -158,7 +158,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <div class="justify-content-center">
+                <div class="pagination justify-content-center">
                     <ul uib-pagination
                         class="pagination-sm"
                         ng-change="page_changed()"

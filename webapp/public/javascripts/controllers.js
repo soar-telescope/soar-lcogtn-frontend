@@ -115,9 +115,9 @@ app.controller('indexController', function($scope, $http, $window) {
             if (res.data.success) {
                 $scope.reqGroups = res.data.data;
                 $scope.pagination.total_items = $scope.reqGroups.count;
-                if ($scope.current_active === null) {
-                    $scope.current_active = $scope.reqGroups.count;
-                }
+                // if ($scope.current_active === null) {
+                //     $scope.current_active = $scope.reqGroups.count;
+                // }
             } else {
                 $scope.message = res.data.msg;
             }

@@ -26,7 +26,7 @@
                        class="list-group-item list-group-item-action list-group-item-dark"
                        ng-class="{active: is_active(res.id)}"
                        ng-click="change_active(res.id)">
-                        <h5> ID: {{res.id}} Submitted by: {{res.submitter}} State: <span ng-class="{'text-danger': res.state == 'CANCELED', 'text-info': res.state == 'PENDING'}" >{{res.state}}</span></h5>
+                        <h5> ID: {{res.id}} Submitted by: {{res.submitter}} State: <span ng-class="{'text-danger': res.state == 'CANCELED', 'text-info': res.state == 'PENDING', 'text-success': res.state == 'COMPLETED'}" >{{res.state}}</span></h5>
                      </a>
                      <div id="res.id" class="collapse" ng-class="{'show': is_active(res.id)}">
                          <div class="card mb-xs-0 mb-md-1">

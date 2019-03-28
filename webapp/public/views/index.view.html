@@ -55,44 +55,6 @@
                                                              <li>Equinox: {{confs.target.equinox}}</li>
                                                              <li>Epoch: {{confs.target.epoch}}</li>
                                                          </ul>
-                                                         <ul>
-                                                             <li>Instrument Type: {{confs.instrument_type}}</li>
-                                                             <li>Type: {{confs.type}}</li>
-                                                             <li>Priority: {{confs.priority}}</li>
-                                                             <li>Instrument Configurations</li>
-                                                                  <ul>
-                                                                      <li ng-repeat-start="instconf in confs.instrument_configs">Mode: {{instconf.mode}}</li>
-                                                                      <li>Slit: {{instconf.optical_elements.slit}}</li>
-                                                                      <li>Grating: {{instconf.optical_elements.grating}}</li>
-                                                                      <li>Exposure Time: {{instconf.exposure_time}} seconds</li>
-                                                                      <li>Exposure Count: {{instconf.exposure_count}}</li>
-                                                                      <li>Bin X: {{instconf.bin_x}}</li>
-                                                                      <li>Bin Y: {{instconf.bin_y}}</li>
-                                                                      <li>Rotation Mode: {{instconf.rot_mode}}</li>
-                                                                      <li ng-repeat-end> Rotation Angle: {{instconf.extra_params.rot_angle}}</li>
-                                                                  </ul>
-                                                             <li>Constraints</li>
-                                                                 <ul>
-                                                                     <li>Maximum Airmass: {{confs.constraints.max_airmass}}</li>
-                                                                     <li>Minimum Lunar Distance: {{confs.constraints.min_lunar_distance}}</li>
-                                                                 </ul>
-                                                             <li>Acquisition</li>
-                                                                 <ul>
-                                                                     <li>Mode: {{confs.acquisition_config.mode}}</li>
-                                                                 </ul>
-                                                             <li>Guiding</li>
-                                                                 <ul>
-                                                                     <li>State: {{confs.guiding_config.state}}</li>
-                                                                     <li>Mode: {{confs.guiding_config.mode}}</li>
-                                                                     <li>Exposure Time: {{confs.guiding_config.exposure_time}}</li>
-                                                                 </ul>
-                                                             <li>Target</li>
-
-
-                                                         </ul>
-                                                         <!--<li>ID: {{confs.id}}</li>-->
-
-                                                         <!--<li>{{instconf.}}</li>-->
                                                      </div>
                                                  </div>
 

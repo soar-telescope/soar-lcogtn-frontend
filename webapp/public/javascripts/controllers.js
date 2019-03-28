@@ -247,8 +247,8 @@ app.controller('addOneController', function($scope, $http, $location, $window) {
 
     $scope.post_data = function () {
         create_request_group();
-        // console.log($scope.request_group);
-        // return 0;
+        console.log($scope.request_group);
+        return 0;
         $http({
             method: 'POST',
             url: '/api/requestgroups',

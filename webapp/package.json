@@ -7,6 +7,7 @@
     "test": "karma start"
   },
   "dependencies": {
+    "angular": "^1.7.8",
     "angularjs-bootstrap-datetimepicker": "^1.1.4",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
@@ -23,6 +24,7 @@
     "angular-route": "^1.7.8",
     "jasmine": "^3.3.1",
     "jasmine-core": "^3.3.0",
+    "jquery": "^3.3.1",
     "karma": "^4.0.1",
     "karma-chrome-launcher": "^2.2.0",
     "karma-coverage": "^1.1.2",

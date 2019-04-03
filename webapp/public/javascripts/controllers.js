@@ -240,13 +240,13 @@ app.controller('addOneController', function($scope, $http, $location, $window) {
         'operator': 'SINGLE',
         'proposal': null};
 
-    create_request_group = function() {
+    $scope.create_request_group = function() {
         $scope.request_group = Object.assign(
             $scope.request_group_general,
             {'requests': $scope.requests})};
 
     $scope.post_data = function () {
-        create_request_group();
+        $scope.create_request_group();
         console.log($scope.request_group);
         return 0;
         $http({
@@ -284,7 +284,6 @@ app.controller('addOneController', function($scope, $http, $location, $window) {
     };
 
     $scope.add_one_window = function() {
-        console.log('Calling add one window');
         var new_window = angular.copy($scope.windows.slice().reverse()[0]);
         $scope.windows.push(new_window);
 
@@ -311,7 +310,6 @@ app.controller('addOneController', function($scope, $http, $location, $window) {
 
     // simbad query
     $scope.simbad_query = function(){
-        console.log($scope.target.name);
         var query_params = {'id': $scope.target.name};
 
         $http({

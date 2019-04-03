@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+  - "stable"
+cache:
+  directories:
+    - "node_modules"
+
+before_script:
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+
+install:
+  - cd webapp
+  - npm install
+
+script:
+  - ./node_modules/.bin/karma start --browsers Firefox --single-run
+

@@ -85,10 +85,12 @@ module.exports = function(config) {
         includeAllSources: true,
         dir: 'coverage/',
         reporters: [{
-        type: 'html', subdir: 'html'
+            type: 'html', subdir: 'html'
             }, {
             type: 'text-summary'
-          }]
+            }, {
+            type: 'lcov', subdir: './'
+        }]
       }
   })
-}
+};

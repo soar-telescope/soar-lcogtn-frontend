@@ -42,13 +42,14 @@ module.exports = function(config) {
     plugins: [
         'karma-jasmine',
         'karma-coverage',
+        'karma-coveralls',
         'karma-firefox-launcher'],
 
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress', 'coverage'],
+    reporters: ['coverage', 'coveralls'],
 
 
     // web server port
@@ -82,10 +83,10 @@ module.exports = function(config) {
     concurrency: Infinity,
       coverageReporter: {
         includeAllSources: true,
-          dir: 'coverage/',
-          reporters: [{
-            type: 'html', subdir: 'html'
-          }, {
+        dir: 'coverage/',
+        reporters: [{
+        type: 'html', subdir: 'html'
+            }, {
             type: 'text-summary'
           }]
       }

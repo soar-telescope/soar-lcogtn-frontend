@@ -383,6 +383,7 @@
                                                 <label for="inst_conf_exposure_time">Exposure Time</label>
                                                 <input type="number"
                                                        min="0"
+                                                       step="any"
                                                        placeholder="Seconds"
                                                        class="form-control form-control-sm"
                                                        id="inst_conf_exposure_time"
@@ -412,6 +413,7 @@
             <div class="card-footer">
                 <button class="btn btn-primary m-1" ng-click="post_data()" ng-disabled="!addOneForm.$valid" style="float: right">Submit</button>
                 <button class="btn btn-danger m-1" ng-click="cancel()" style="float: right">Cancel</button>
+                <button class="btn btn-success m-1" uib-tooltip="Will print the payload in the console without submitting" ng-click="show_payload()" style="float: right">Show Payload</button>
             </div>
         </div>
     </form>

@@ -218,7 +218,7 @@ app.controller('addOneController', function($scope, $http, $location, $window) {
         'guiding_config': {
             'state': 'OPTIONAL'
         },
-        'instrument_configs': $scope.instrument_configs,
+        'instrument_configs': null,
         'instrument_type': 'SOAR_GHTS_REDCAM',
         'target': $scope.target,
         'type': 'SPECTRUM'}];
@@ -241,12 +241,22 @@ app.controller('addOneController', function($scope, $http, $location, $window) {
         'proposal': null};
 
     $scope.create_request_group = function() {
+        for (i = 0; i < $scope.configurations.length; i++) {
+            $scope.configurations[i].instrument_configs = $scope.instrument_configs[i]
+        }
+        console.log($scope.configurations);
         $scope.request_group = Object.assign(
             $scope.request_group_general,
             {'requests': $scope.requests})};
 
+    $scope.show_payload = function(){
+        $scope.create_request_group();
+        console.log($scope.request_group);
+    };
+
     $scope.post_data = function () {
         $scope.create_request_group();
+        console.log($scope.request_group);
         $http({
             method: 'POST',
             url: '/api/requestgroups',
